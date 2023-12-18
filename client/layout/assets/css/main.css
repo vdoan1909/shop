@@ -1,0 +1,25 @@
+.kich_co {
+    text-align: center;
+    align-items: center;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    color: #444;
+    display: column;
+    font-size: 14px;
+    justify-content: center;
+    margin: 0 25px 0;
+    overflow: hidden;
+    padding: 5px 0px;
+    width: 20%;
+}
+
+.kich_co:hover {
+    color: orangered;
+    border-color: orangered;
+    cursor: pointer;
+}
+
+.kich_co-selected {
+    color: orangered;
+    border-color: orangered;
+}
