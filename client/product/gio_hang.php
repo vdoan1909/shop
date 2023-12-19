@@ -18,7 +18,7 @@
                 <div class="page-main-content">
                     <div class="akasha">
                         <div class="akasha-notices-wrapper"></div>
-                        <form class="akasha-cart-form">
+                        <form class="akasha-cart-form" method="post">
                             <table class="shop_table shop_table_responsive cart akasha-cart-form__contents" cellspacing="0">
                                 <thead>
                                     <tr>
@@ -30,53 +30,83 @@
                                         <th class="product-subtotal">Tổng</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <?php foreach ($ds_san_pham_gio_hang as $sp_gh) :
-                                        $fm_gia = number_format($sp_gh["gia"], 0, ',', '.');
-                                        $tong_gia = $sp_gh["gia"] * $sp_gh["so_luong"];
-                                        $fm_tong_gia = number_format($tong_gia, 0, ',', '.');
-                                    ?>
-                                        <tr class="akasha-cart-form__cart-item cart_item">
-                                            <td class="product-remove">
-                                                <a href="#" class="remove" aria-label="Remove this item" data-product_id="27" data-product_sku="885B712">×</a>
-                                            </td>
-                                            <td class="product-thumbnail">
-                                                <a href="#"><img src="assets/upload/<?= $sp_gh["anh"] ?>" class="attachment-akasha_thumbnail size-akasha_thumbnail" alt="img" width="600" height="778"></a>
-                                            </td>
-                                            <td class="product-name" data-title="Product">
-                                                <a href="#"><?= $sp_gh["ten"] ?></a>
-                                            </td>
-                                            <td class="product-price" data-title="Price">
-                                                <span class="akasha-Price-amount amount"><span class="akasha-Price-currencySymbol"><?= $fm_gia ?></span>
-                                                    VND</span>
-                                            </td>
-                                            <td class="product-quantity" data-title="Quantity">
-                                                <div class="quantity">
-                                                    <span class="qty-label">Số lượng:</span>
-                                                    <div class="control">
-                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                                                        <input name="so_luong" type="text" value="<?= $sp_gh["so_luong"] ?>" title="Qty" class="input-qty input-text qty text">
-                                                        <a class="btn-number qtyplus quantity-plus" href="#">+</a>
+                                <tbody id="order-cart">
+                                    <?php if (isset($_SESSION["tai_khoan"])) { ?>
+                                        <?php foreach ($ds_san_pham_gio_hang as $sp_gh) :
+                                            $fm_gia = number_format($sp_gh["gia"], 0, ',', '.');
+                                            $tong_gia = $sp_gh["gia"] * $sp_gh["so_luong"];
+                                            $fm_tong_gia = number_format($tong_gia, 0, ',', '.');
+                                        ?>
+                                            <tr class="akasha-cart-form__cart-item cart_item">
+                                                <td class="product-remove">
+                                                    <a href="#" class="remove" aria-label="Remove this item" data-product_id="27" data-product_sku="885B712">×</a>
+                                                </td>
+                                                <td class="product-thumbnail">
+                                                    <a href="#"><img src="assets/upload/<?= $sp_gh["anh"] ?>" class="attachment-akasha_thumbnail size-akasha_thumbnail" alt="img" width="600" height="778"></a>
+                                                </td>
+                                                <td class="product-name" data-title="Product">
+                                                    <a href="#"><?= $sp_gh["ten"] ?></a>
+                                                </td>
+                                                <td class="product-price" data-title="Price">
+                                                    <span class="akasha-Price-amount amount"><span class="akasha-Price-currencySymbol"><?= $fm_gia ?></span>
+                                                        VND</span>
+                                                </td>
+                                                <td class="product-quantity" data-title="Quantity">
+                                                    <div class="quantity">
+                                                        <span class="qty-label">Số lượng:</span>
+                                                        <div class="control">
+                                                            <a class="btn-number qtyminus quantity-minus" href="#">-</a>
+                                                            <input name="so_luong" type="number" value="<?= $sp_gh["so_luong"] ?>" title="Qty" class="input-qty input-text qty text">
+                                                            <a class="btn-number qtyplus quantity-plus" href="#">+</a>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td class="product-subtotal" data-title="Total">
-                                                <span class="akasha-Price-amount amount"><span class="akasha-Price-currencySymbol"><?= $fm_tong_gia ?></span>
-                                                    VND</span>
+                                                </td>
+                                                <td class="product-subtotal" data-title="Total">
+                                                    <span class="akasha-Price-amount amount"><span class="akasha-Price-currencySymbol"><?= $fm_tong_gia ?></span>
+                                                        VND</span>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php } else { ?>
+                                        <tr>
+                                            <td>
+                                                <span>Không có sản phẩm trong giỏ hàng !</span>
                                             </td>
                                         </tr>
-                                    <?php endforeach; ?>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </form>
                         <div class="cart-collaterals">
                             <div class="cart_totals ">
-                                <h2>Cart totals</h2>
-                                <?php foreach ($ds_san_pham_gio_hang as $sp_gh) :
-                                    $tong_gia = $sp_gh["gia"] * $sp_gh["so_luong"];
-                                    $fm_tong_gia = number_format($tong_gia, 0, ',', '.');
-                                ?>
-                                    <table class="shop_table shop_table_responsive" cellspacing="0">
+                                <?php if (isset($_SESSION["tai_khoan"])) { ?>
+                                    <h2>Cart totals</h2>
+                                    <?php foreach ($ds_san_pham_gio_hang as $sp_gh) :
+                                        $tong_gia = $sp_gh["gia"] * $sp_gh["so_luong"];
+                                        $fm_tong_gia = number_format($tong_gia, 0, ',', '.');
+                                    ?>
+                                        <table class="shop_table shop_table_responsive" cellspacing="0">
+                                            <tbody>
+                                                <tr class="cart-subtotal">
+                                                    <th>Tổng phụ</th>
+                                                    <td data-title="Subtotal"><span class="akasha-Price-amount amount"><span class="akasha-Price-currencySymbol"><?= $fm_tong_gia ?></span>
+                                                            VND</span></td>
+                                                </tr>
+                                                <tr class="order-total">
+                                                    <th>Tổng</th>
+                                                    <td data-title="Total"><strong><span class="akasha-Price-amount amount"><span class="akasha-Price-currencySymbol"><?= $fm_tong_gia ?></span>
+                                                                VND</span></strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    <?php endforeach; ?>
+                                    <div class="akasha-proceed-to-checkout">
+                                        <a href="#" class="checkout-button button alt akasha-forward">
+                                            Proceed to checkout</a>
+                                    </div>
+                                <?php } else { ?>
+                                    <table style="display: none;" class="shop_table shop_table_responsive" cellspacing="0">
                                         <tbody>
                                             <tr class="cart-subtotal">
                                                 <th>Tổng phụ</th>
@@ -91,11 +121,11 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                <?php endforeach; ?>
-                                <div class="akasha-proceed-to-checkout">
-                                    <a href="#" class="checkout-button button alt akasha-forward">
-                                        Proceed to checkout</a>
-                                </div>
+                                    <div style="display: none;" class="akasha-proceed-to-checkout">
+                                        <a href="#" class="checkout-button button alt akasha-forward">
+                                            Proceed to checkout</a>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="col-md-12 col-sm-12 dreaming_crosssell-product">

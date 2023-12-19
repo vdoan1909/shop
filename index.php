@@ -60,7 +60,9 @@ switch ($url) {
 
     case "gio_hang":
         $title = "Giỏ hàng";
-        $ds_san_pham_gio_hang = san_pham_gio_hang($_SESSION["tai_khoan"]["id"]);
+        if (isset($_SESSION["tai_khoan"]["id"])) {
+            $ds_san_pham_gio_hang = san_pham_gio_hang($_SESSION["tai_khoan"]["id"]);
+        }
         $VIEW = "client/product/gio_hang.php";
         break;
         // ========== SẢN PHẨM ========== //

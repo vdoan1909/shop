@@ -112,22 +112,23 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <script>
-    $(document).ready(function() {
-        $(".kich_co strong").click(function() {
-            // Remove the class from all other elements
-            $(".kich_co strong").removeClass("kich_co-selected");
+$(document).ready(function() {
+    $(".kich_co strong").click(function() {
+        // Remove the class from all other elements
+        $(".kich_co strong").removeClass("kich_co-selected");
 
-            // Add the class to the clicked <strong> element
-            $(this).addClass("kich_co-selected");
+        // Add the class to the clicked <strong> element
+        $(this).addClass("kich_co-selected");
 
-            // Get the value from the clicked <strong> element
-            var kichCoId = $(this).next('input[name="id"]').val();
+        // Get the value from the clicked <strong> element
+        var kichCoId = $(this).next('input[name="id"]').val();
 
-            // Update the value of the hidden input with the clicked kich_co ID
-            $("input[name='id_kc']").val(kichCoId);
-        });
+        // Update the value of the hidden input with the clicked kich_co ID
+        $("input[name='id_kc']").val(kichCoId);
     });
+});
 </script>
+
 </body>
 
 </html>
