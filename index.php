@@ -45,17 +45,10 @@ switch ($url) {
         $title = "Giỏ hàng";
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             extract($_POST);
-
             $lay_id_san_pham_kich_co = lay_id_san_pham_kich_co($id_sp, $id_kc);
-            $san_pham_gio_hang = san_pham_gio_hang($_SESSION["tai_khoan"]["id"]);
-
-            if (count($san_pham_gio_hang) > 0) {
-                update_san_pham_kich_co_gio_hang($_SESSION["tai_khoan"]["id"], $lay_id_san_pham_kich_co["id"], $so_luong);
-            } else {
-                san_pham_kich_co_gio_hang($_SESSION["tai_khoan"]["id"], $lay_id_san_pham_kich_co["id"], $so_luong);
-            }
+            san_pham_kich_co_gio_hang($_SESSION["tai_khoan"]["id"], $lay_id_san_pham_kich_co["id"], $so_luong);
+            header("location: index.php?url=gio_hang");
         }
-        header("location: index.php?url=gio_hang");
         break;
 
     case "gio_hang":
@@ -63,6 +56,7 @@ switch ($url) {
         if (isset($_SESSION["tai_khoan"]["id"])) {
             $ds_san_pham_gio_hang = san_pham_gio_hang($_SESSION["tai_khoan"]["id"]);
         }
+        $ds_san_pham_ban_them = san_pham_ban_them_gio_hang();
         $VIEW = "client/product/gio_hang.php";
         break;
         // ========== SẢN PHẨM ========== //

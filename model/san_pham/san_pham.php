@@ -151,7 +151,6 @@ function san_pham_ban_them($id_th)
     return $sp_bt;
 }
 
-
 function san_pham_gio_hang($id_kh)
 {
     $sql = "select gio_hang.*, sanpham_kichco.so_luong as sl_sp, san_pham.anh as anh, san_pham.ten as ten, sanpham_kichco.gia as gia 
@@ -169,4 +168,19 @@ function so_luong_san_pham_gio_hang($id_kh)
     $sql = "select count(so_luong) as so_luong from gio_hang where id_kh = ?";
     $so_luong = pdo_query_one($sql, $id_kh);
     return $so_luong;
+}
+
+function san_pham_ban_them_gio_hang()
+{
+    $sql = "select distinct san_pham.*, sanpham_kichco.id as id_sp_kc, sanpham_kichco.gia, the_loai.id as id_tl, the_loai.ten_loai as ten_loai, the_loai.trang_thai as trang_thai_tl, thuong_hieu.id as id_th, thuong_hieu.ten_thuong_hieu as ten_thuong_hieu, thuong_hieu.trang_thai as trang_thai_th 
+    from san_pham 
+    join the_loai on the_loai.id = san_pham.id_the_loai 
+    join thuong_hieu on thuong_hieu.id = san_pham.id_thuong_hieu 
+    join sanpham_kichco on sanpham_kichco.id_sp = san_pham.id 
+    where san_pham.trang_thai = 1 and the_loai.trang_thai = 1 and thuong_hieu.trang_thai = 1 
+    group by san_pham.id 
+    order by rand() 
+    limit 0,3";
+    $sp_bc = pdo_query($sql);
+    return $sp_bc;
 }
