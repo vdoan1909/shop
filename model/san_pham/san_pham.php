@@ -165,7 +165,7 @@ function san_pham_gio_hang($id_kh)
 
 function so_luong_san_pham_gio_hang($id_kh)
 {
-    $sql = "select count(so_luong) as so_luong from gio_hang where id_kh = ?";
+    $sql = "select sum(so_luong) as so_luong from gio_hang where id_kh = ?";
     $so_luong = pdo_query_one($sql, $id_kh);
     return $so_luong;
 }

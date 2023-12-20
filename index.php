@@ -107,30 +107,20 @@ switch ($url) {
     case "dang_nhap":
         $title = "Đăng nhập";
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            extract($_POST);
+            $email = $_POST['email'];
+            $mat_khau = $_POST['mat_khau'];
 
-            $ds_email = all_email_tai_khoan();
+            $tai_khoan = all_tai_khoan($email, $mat_khau);
+
             $is_email = '/^\\S+@\\S+\\.\\S+$/';
             $errors = [];
-            $email_flag = false;
 
             if (empty(trim($email))) {
-                $errors["email_dang_nhap"] = "Email chưa được nhập !";
+                $errors["email_dang_nhap"] = "Email đang trống !";
             } else {
                 if (!preg_match($is_email, $email)) {
-                    $errors["email_dang_nhap"] = "Email không hợp lệ ?";
-                } else {
-                    foreach ($ds_email as $email_da_dung) {
-                        if ($email == $email_da_dung["email"]) {
-                            $email_flag = true;
-                            break;
-                        }
-                    }
+                    $errors["email_dang_nhap"] = "Email không đúng định dạng !";
                 }
-            }
-
-            if (!$email_flag) {
-                $errors["email_dang_nhap"] = "Email không tồn tại !";
             }
 
             if (empty(trim($mat_khau))) {
@@ -138,13 +128,15 @@ switch ($url) {
             }
 
             if (empty($errors)) {
-                $tai_khoan = all_tai_khoan($email);
-                if ($tai_khoan["role"] == 1) {
-                    $_SESSION["admin"] = $tai_khoan;
-                    header("location: index.php?url=admin");
-                } else {
+                if (is_array($tai_khoan)) {
                     $_SESSION["tai_khoan"] = $tai_khoan;
-                    header("location: index.php?url=trang_chu");
+                    if ($tai_khoan["role"] == 1) {
+                        header("location: index.php?url=admin");
+                    } else {
+                        header("location: index.php?url=trang_chu");
+                    }
+                } else {
+                    $errors["dang_nhap"] = "Không tồn tại email hoặc sai mật khẩu";
                 }
             }
         }
@@ -193,7 +185,7 @@ switch ($url) {
 
             if (empty($errors)) {
                 cap_nhat_tai_khoan($_SESSION["tai_khoan"]["id"], $base_name, $ten, $email, $dia_chi);
-                $tai_khoan = all_tai_khoan($email);
+                $tai_khoan = all_tai_khoan($email, $mat_khau);
                 if ($tai_khoan["role"] == 1) {
                     $_SESSION["admin"] = $tai_khoan;
                     header("location: index.php?url=admin");

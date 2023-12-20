@@ -32,6 +32,7 @@
                                         <input type="text" class="akasha-Input akasha-Input--text input-text" name="mat_khau">
                                     </p>
                                     <span style="color: red;"><?= $errors["mat_khau_dang_nhap"] ?? "" ?></span>
+                                    <span style="color: red;"><?= $errors["dang_nhap"] ?? "" ?></span>
                                     <p class="form-row">
                                         <button type="submit" class="akasha-Button button">Đăng nhập
                                         </button>

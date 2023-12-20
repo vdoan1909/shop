@@ -12,9 +12,10 @@ function add_tai_khoan($email, $mat_khau)
     pdo_execute($sql, $email, $mat_khau);
 }
 
-function all_tai_khoan($email)
+function all_tai_khoan($email, $mat_khau)
 {
-    $sql = "select * from tai_khoan where email like '%" . $email . "%' and trang_thai = 1";
+
+    $sql = "select * from tai_khoan where email like '%$email%' and mat_khau like '%$mat_khau%' AND trang_thai = 1";
     $tai_khoan = pdo_query_one($sql);
     return $tai_khoan;
 }

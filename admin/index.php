@@ -1,6 +1,7 @@
 <?php
 ob_start();
-if (!isset($_SESSION["admin"])) {
+session_start();
+if ($_SESSION["tai_khoan"]["role"] !=  1) {
     header("location: ../index.php");
 }
 $url = isset($_GET['url']) ? $_GET['url'] : "";

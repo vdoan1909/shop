@@ -195,10 +195,10 @@
                             </div>
                             <div class="product-info equal-elem">
                                 <h3 class="product-name product_title">
-                                    <a href="index.php?url=ct_san_pham&id_sp_kc=<?= $sp_moi["id_sp_kc"] ?>&id_tl=<?= $sp_moi["id_tl"] ?>&id_sp=<?= $sp_moi["id"] ?>"
+                                    <a href="index.php?url=ct_san_pham&id_sp_kc=<?= $sp_moi["id_sp_kc"] ?>&id_th=<?= $sp_moi["id_th"] ?>&id_tl=<?= $sp_moi["id_tl"] ?>&id_sp=<?= $sp_moi["id"] ?>"
                                         tabindex="0"><?= $sp_moi["ten"] ?></a>
                                 </h3>
-                                <span class="akasha-Price-currencySymbol"><?= $fm_gia_moi ?></span>
+                                <span class="akasha-Price-currencySymbol"><?= $fm_gia_moi ?> VND</span>
                             </div>
                         </div>
                     </div>
