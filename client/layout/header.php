@@ -58,7 +58,8 @@
                                     </li>
                                     <li id="menu-item-230"
                                         class="menu-item menu-item-type-post_type menu-item-object-megamenu menu-item-230 parent parent-megamenu item-megamenu menu-item-has-children">
-                                        <a class="akasha-menu-item-title" title="Home" href="#">Sản phẩm</a>
+                                        <a class="akasha-menu-item-title" title="Home"
+                                            href="index.php?url=ds_san_pham">Sản phẩm</a>
                                     </li>
                                 </ul>
                             </div>

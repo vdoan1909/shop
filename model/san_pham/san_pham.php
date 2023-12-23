@@ -12,12 +12,13 @@ function all_san_pham()
 
 function all_san_pham_view()
 {
-    $sql = "select san_pham.*, the_loai.ten_loai as ten_loai, the_loai.trang_thai as trang_thai_tl, thuong_hieu.ten_thuong_hieu as ten_thuong_hieu, thuong_hieu.trang_thai as trang_thai_th 
+    $sql = "select distinct san_pham.*, sanpham_kichco.id as id_sp_kc, sanpham_kichco.gia, the_loai.id as id_tl, the_loai.ten_loai as ten_loai, the_loai.trang_thai as trang_thai_tl, thuong_hieu.id as id_th, thuong_hieu.ten_thuong_hieu as ten_thuong_hieu, thuong_hieu.trang_thai as trang_thai_th 
     from san_pham 
     join the_loai on the_loai.id = san_pham.id_the_loai 
     join thuong_hieu on thuong_hieu.id = san_pham.id_thuong_hieu 
+    join sanpham_kichco on sanpham_kichco.id_sp = san_pham.id 
     where san_pham.trang_thai = 1 and the_loai.trang_thai = 1 and thuong_hieu.trang_thai = 1 
-    order by san_pham.id desc";
+    group by san_pham.id";
     $san_pham = pdo_query($sql);
     return $san_pham;
 }
@@ -183,4 +184,18 @@ function san_pham_ban_them_gio_hang()
     limit 0,3";
     $sp_bc = pdo_query($sql);
     return $sp_bc;
+}
+
+function san_pham_theo_trang($from, $row)
+{
+    $sql = "select * from san_pham  limit $from, $row";
+    $san_pham = pdo_query($sql);
+    return $san_pham;
+}
+
+function tong_san_pham_theo_trang()
+{
+    $sql = "select count(*) as totalProducts from san_pham";
+    $san_pham = pdo_query($sql);
+    return $san_pham;
 }

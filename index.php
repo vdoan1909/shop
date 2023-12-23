@@ -24,6 +24,13 @@ switch ($url) {
         // ========== TRANG CHỦ ========== //
 
         // ========== SẢN PHẨM ========== //
+        // Danh sách sản phẩm
+    case "ds_san_pham":
+        $title = "Danh sách sản phẩm";
+        $ds_san_pham = all_san_pham_view();
+        $VIEW = "client/product/danh_sach_san_pham.php";
+        break;
+
         // Chi tiết sản phẩm
     case "ct_san_pham":
         $title = "Chi tiết sản phẩm";
@@ -46,8 +53,15 @@ switch ($url) {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             extract($_POST);
             $lay_id_san_pham_kich_co = lay_id_san_pham_kich_co($id_sp, $id_kc);
-            san_pham_kich_co_gio_hang($_SESSION["tai_khoan"]["id"], $lay_id_san_pham_kich_co["id"], $so_luong);
-            header("location: index.php?url=gio_hang");
+            $check_san_pham_gio_hang = check_san_pham_gio_hang($_SESSION["tai_khoan"]["id"], $lay_id_san_pham_kich_co["id"]);
+
+            if (is_array($check_san_pham_gio_hang)) {
+                update_san_pham_kich_co_gio_hang($_SESSION["tai_khoan"]["id"], $lay_id_san_pham_kich_co["id"], $so_luong);
+                header("location: index.php?url=gio_hang");
+            } else {
+                san_pham_kich_co_gio_hang($_SESSION["tai_khoan"]["id"], $lay_id_san_pham_kich_co["id"], $so_luong);
+                header("location: index.php?url=gio_hang");
+            }
         }
         break;
 

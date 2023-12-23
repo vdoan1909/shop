@@ -50,6 +50,7 @@ $fm_gia = number_format($ct_san_pham["gia"], 0, ',', '.');
                                     </div>
                                     <div class="single_variation_wrap">
                                         <div class="akasha-variation single_variation"></div>
+                                        <?php if (isset($_SESSION["tai_khoan"])) { ?>
                                         <div
                                             class="akasha-variation-add-to-cart variations_button akasha-variation-add-to-cart-disabled">
                                             <div class="quantity">
@@ -67,6 +68,25 @@ $fm_gia = number_format($ct_san_pham["gia"], 0, ',', '.');
                                                 Add to cart
                                             </button>
                                         </div>
+                                        <?php } else { ?>
+                                        <div style="display: none;"
+                                            class="akasha-variation-add-to-cart variations_button akasha-variation-add-to-cart-disabled">
+                                            <div class="quantity">
+                                                <span class="qty-label">Quantiy:</span>
+                                                <div class="control">
+                                                    <a class="btn-number qtyminus quantity-minus" href="#">-</a>
+                                                    <input type="text" data-step="1" min="0" max="" name="so_luong"
+                                                        value="0" title="Qty" class="input-qty input-text qty text"
+                                                        size="4" pattern="[0-9]*" inputmode="numeric">
+                                                    <a class="btn-number qtyplus quantity-plus" href="#">+</a>
+                                                </div>
+                                            </div>
+                                            <button type="submit"
+                                                class="single_add_to_cart_button button alt disabled akasha-variation-selection-needed">
+                                                Add to cart
+                                            </button>
+                                        </div>
+                                        <?php } ?>
                                     </div>
                                 </form>
                                 <div class="akasha-share-socials">
@@ -166,12 +186,6 @@ $fm_gia = number_format($ct_san_pham["gia"], 0, ',', '.');
                                     <img class="img-responsive" src="assets/upload/<?= $sp_cl["anh"] ?>"
                                         alt="Long Oversized" width="600" height="778">
                                 </a>
-                                <div class="group-button">
-                                    <div class="add-to-cart">
-                                        <a href="#" class="button product_type_variable add_to_cart_button">Add to
-                                            cart</a>
-                                    </div>
-                                </div>
                             </div>
                             <div class="product-info equal-elem">
                                 <h3 class="product-name product_title">
@@ -207,12 +221,6 @@ $fm_gia = number_format($ct_san_pham["gia"], 0, ',', '.');
                                     <img class="img-responsive" src="assets/upload/<?= $sp_bt["anh"] ?>"
                                         alt="Mini Dress" width="600" height="778">
                                 </a>
-                                <div class="group-button">
-                                    <div class="add-to-cart">
-                                        <a href="#" class="button product_type_external add_to_cart_button">Buy
-                                            it on Amazon</a>
-                                    </div>
-                                </div>
                             </div>
                             <div class="product-info equal-elem">
                                 <h3 class="product-name product_title">
