@@ -27,6 +27,9 @@ $ds_san_pham_gio_hang = san_pham_gio_hang($_SESSION["tai_khoan"]["id"]);
         <span class="akasha-Price-amount amount"><span class="akasha-Price-currencySymbol"><?= $fm_gia ?></span>
             VND</span>
     </td>
+    <td class="product-name" data-title="Product">
+        <a href="#"><?= $sp_gh["kich_co"] ?></a>
+    </td>
     <td class="product-quantity" data-title="Quantity">
         <input id="soluong_<?= $sp_gh["id"] ?>" type="number" min="1" max="<?= $sp_gh["sl_sp"] ?>" step="1"
             value="<?= $sp_gh["so_luong"] ?>" oninput="updateSoLuong(<?= $id ?>,<?= $sp_gh['sl_sp'] ?>)" />

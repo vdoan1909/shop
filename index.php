@@ -55,13 +55,20 @@ switch ($url) {
             $lay_id_san_pham_kich_co = lay_id_san_pham_kich_co($id_sp, $id_kc);
             $check_san_pham_gio_hang = check_san_pham_gio_hang($_SESSION["tai_khoan"]["id"], $lay_id_san_pham_kich_co["id"]);
 
-            if (is_array($check_san_pham_gio_hang)) {
-                update_san_pham_kich_co_gio_hang($_SESSION["tai_khoan"]["id"], $lay_id_san_pham_kich_co["id"], $so_luong);
-                header("location: index.php?url=gio_hang");
-            } else {
-                san_pham_kich_co_gio_hang($_SESSION["tai_khoan"]["id"], $lay_id_san_pham_kich_co["id"], $so_luong);
-                header("location: index.php?url=gio_hang");
+            san_pham_kich_co_gio_hang($_SESSION["tai_khoan"]["id"], $lay_id_san_pham_kich_co["id"], $so_luong);
+
+            // Tạo session "gio_hang" nếu chưa tồn tại
+            if (!isset($_SESSION["gio_hang"])) {
+                $_SESSION["gio_hang"] = array();
             }
+
+            // Thêm sản phẩm vào session "gio_hang"
+            $san_pham = array(
+                "id_kh" => $_SESSION["tai_khoan"]["id"],
+                "id_sp_kc" => $lay_id_san_pham_kich_co["id"],
+                "so_luong" => $so_luong
+            );
+            header("location: index.php?url=gio_hang");
         }
         break;
 
@@ -74,6 +81,23 @@ switch ($url) {
         $VIEW = "client/product/gio_hang.php";
         break;
         // ========== SẢN PHẨM ========== //
+
+        // ========== THANH TOÁN ========== //
+    case "thanh_toan":
+        $title = "Thanh toán";
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $id_kh = $_POST["id_kh"];
+            $tong_gia_gio_hang = $_POST["tong_gia_gio_hang"];
+            $tong_sl_sp = $_POST["tong_sl_sp"];
+
+            if (isset($_POST["id_sp_kc"]) && is_array($_POST["id_sp_kc"])) {
+                $id_sp_kc_array = $_POST["id_sp_kc"];
+            }
+            var_dump($_POST);
+        }
+        $VIEW = "assets/vnpay_php/index.php";
+        break;
+        // ========== THANH TOÁN ========== //
 
         // ========== TÀI KHOẢN ========== //
     case "tai_khoan":

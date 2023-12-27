@@ -29,10 +29,6 @@ $inputData = array(
     "vnp_TxnRef" => $vnp_TxnRef,
     "vnp_ExpireDate" => $vnp_ExpireDate,
     "vnp_Bill_Email" => $vnp_Bill_Email,
-    // "id_rap" => $id_rap,
-    // "id_ngaychieu" => $id_ngaychieu,
-    // "id_giochieu" => $id_giochieu,
-    // "vnp_Bill_Country" => $vnp_Bill_Country
 );
 
 if (isset($vnp_BankCode) && $vnp_BankCode != "") {
@@ -42,7 +38,6 @@ if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
     $inputData['vnp_Bill_State'] = $vnp_Bill_State;
 }
 
-//var_dump($inputData);
 ksort($inputData);
 $query = "";
 $i = 0;

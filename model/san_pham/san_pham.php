@@ -154,9 +154,10 @@ function san_pham_ban_them($id_th)
 
 function san_pham_gio_hang($id_kh)
 {
-    $sql = "select gio_hang.*, sanpham_kichco.so_luong as sl_sp, san_pham.anh as anh, san_pham.ten as ten, sanpham_kichco.gia as gia 
+    $sql = "select gio_hang.*, kich_co.kich_co as kich_co, sanpham_kichco.so_luong as sl_sp, san_pham.anh as anh, san_pham.ten as ten, sanpham_kichco.gia as gia 
     from gio_hang 
     join sanpham_kichco on sanpham_kichco.id = gio_hang.id_sp_kc 
+    join kich_co on kich_co.id = sanpham_kichco.id_kc 
     join san_pham on san_pham.id = sanpham_kichco.id_sp 
     where id_kh = ? 
     order by (gio_hang.id) desc";
