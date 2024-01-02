@@ -47,7 +47,6 @@
                                             $tong_gia_gio_hang += $tong_gia;
                                             $tong_sl_sp += $sp_gh['so_luong'];
                                         ?>
-
                                     <input type="hidden" name="tong_gia_gio_hang" value="<?= $tong_gia_gio_hang ?>">
                                     <input type="hidden" name="tong_sl_sp" value="<?= $tong_sl_sp ?>">
                                     <input type="hidden" name="id_sp_kc[]" value="<?= $sp_gh['id_sp_kc'] ?>">

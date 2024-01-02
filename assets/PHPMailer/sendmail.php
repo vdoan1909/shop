@@ -1,39 +1,38 @@
 <?php
-// session_start();
-// // var_dump($_SESSION['tai_khoan']);
-// $email = $_SESSION['tai_khoan']['email'] ? $_SESSION['tai_khoan']['email'] : "";
-// include('src/PHPMailer.php');
-// include('src/Exception.php');
-// include('src/OAuth.php');
-// include('src/POP3.php');
-// include('src/SMTP.php');
+include('src/PHPMailer.php');
+include('src/Exception.php');
+include('src/OAuth.php');
+include('src/POP3.php');
+include('src/SMTP.php');
+require_once "model/tai_khoan/tai_khoan.php";
 
-// use PHPMailer\PHPMailer\PHPMailer;
-// use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-// $mail = new PHPMailer(true);
-// try {
+$thong_tin_tai_khoan = all_tai_khoan_email($email_kh);
+$email = $thong_tin_tai_khoan["email"];
 
-//     $mail->SMTPDebug = 0;
-//     $mail->isSMTP();
-//     $mail->Host = 'smtp.gmail.com';
-//     $mail->SMTPAuth = true;
-//     $mail->Username = 'openaivdoan@gmail.com';
-//     $mail->Password = 'xepkbhygqjrgucug';
-//     $mail->SMTPSecure = 'tls';
-//     $mail->Port = 587;
+$mail = new PHPMailer(true);
+try {
 
+    $mail->SMTPDebug = 2;
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'openaivdoan@gmail.com';
+    $mail->Password = 'xepkbhygqjrgucug';
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
 
-//     $mail->setFrom('openaivdoan@gmail.com', 'ĐoanepTrai');
-//     $mail->addAddress($email, 'doannvph33201');
+    $mail->setFrom('openaivdoan@gmail.com', 'DoandepTrai');
+    $mail->addAddress($email, 'Doan');
 
-//     $mail->isHTML(true);
-//     $mail->Subject = 'Thanh toán đặt vé';
-//     $mail->Body = 'Chúng tôi xin chân thành cảm ơn sự quan tâm và ủng hộ của quý khách trong việc đặt vé xem phim. Sự đồng hành của quý khách là một niềm vui lớn đối với chúng tôi và chúng tôi sẽ nỗ lực hết mình để mang đến cho quý khách trải nghiệm xem phim tuyệt vời!';
-//     $mail->addAttachment($qrcode, 'qrcode.png');
+    $mail->isHTML(true);
+    $mail->Subject = 'Thanh toan hoa don';
+    $mail->Body = 'Chân thành cảm ơn bạn đã chọn *Doan* để làm đẹp cho bản thân! Chúng tôi rất vui mừng được phục vụ và hy vọng rằng sản phẩm bạn chọn sẽ mang lại sự thoải mái và phong cách. Chúc bạn luôn tỏa sáng và hạnh phúc mỗi ngày. Hãy tiếp tục là chính mình và đừng quên ghé thăm cửa hàng của chúng tôi thường xuyên!';
 
-//     $mail->send();
-//     // echo 'Message has been sent';
-// } catch (Exception $e) {
-//     // echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
-// }
+    $mail->send();
+    // echo 'Message has been sent';
+} catch (Exception $e) {
+    // echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+}

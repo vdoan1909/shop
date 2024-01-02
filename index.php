@@ -7,6 +7,9 @@ require_once "model/pdo.php";
 require_once "model/san_pham/san_pham.php";
 require_once "model/san_pham_kich_co/san_pham_kich_co.php";
 require_once "model/tai_khoan/tai_khoan.php";
+require_once "model/phuong_thuc_thanh_toan/phuong_thuc_thanh_toan.php";
+require_once "model/don_hang/don_hang.php";
+require_once "assets/phpqrcode/qrlib.php";
 
 if (isset($_SESSION["tai_khoan"]["id"])) {
     $so_luong_san_pham_gio_hang = so_luong_san_pham_gio_hang($_SESSION["tai_khoan"]["id"]);
@@ -85,17 +88,73 @@ switch ($url) {
         // ========== THANH TOÁN ========== //
     case "thanh_toan":
         $title = "Thanh toán";
+
+        $all_phuong_thuc_thanh_toan = all_phuong_thuc_thanh_toan();
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $id_kh = $_POST["id_kh"];
             $tong_gia_gio_hang = $_POST["tong_gia_gio_hang"];
             $tong_sl_sp = $_POST["tong_sl_sp"];
 
             if (isset($_POST["id_sp_kc"]) && is_array($_POST["id_sp_kc"])) {
-                $id_sp_kc_array = $_POST["id_sp_kc"];
+                $id_sp_kc = $_POST["id_sp_kc"];
             }
-            var_dump($_POST);
+
+            // var_dump($id_sp_kc);
         }
         $VIEW = "assets/vnpay_php/index.php";
+        break;
+
+    case "tien_hanh_thanh_toan":
+        $title = "Thanh toán";
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            extract($_POST);
+            $thong_tin_san_pham_qr = [];
+
+            $thong_tin_tai_khoan = thong_tin_tai_khoan($id_kh);
+            $email_kh = $thong_tin_tai_khoan["email"];
+
+            // var_dump($id_sp_kc);
+            if (!is_array($id_sp_kc)) {
+                $id_sp_kc = explode(",", $id_sp_kc);
+            }
+            $id_sp_kc_string = implode(",", $id_sp_kc);
+            // var_dump($id_sp_kc_string);
+
+            foreach ($id_sp_kc as $id_sp_kc_qr) {
+                $ctsp_qr = one_san_pham_kich_co($id_sp_kc_qr);
+
+                // echo "<pre>";
+                // print_r($ctsp_qr);
+                // echo "</pre>";
+
+                $thong_tin_san_pham_qr[] = [
+                    'ten_san_pham' => $ctsp_qr['ten_san_pham'],
+                    'kich_co' => $ctsp_qr['kich_co'],
+                    'gia' => $ctsp_qr['gia']
+                ];
+            }
+
+            $noi_dung_qr = "";
+            foreach ($thong_tin_san_pham_qr as $thong_tin) {
+                $noi_dung_qr .= "Tên sản phẩm: " . $thong_tin['ten_san_pham'] . "\nKích cỡ: " . $thong_tin['kich_co'] . "\nGiá: " . $thong_tin['gia'] . "\n\n";
+            }
+
+            $path = "assets/qr/";
+            $qrcode = $path . time() . ".png";
+            QRcode::png("Email: {$email_kh}, Thông tin sản phẩm: {$noi_dung_qr}, Tổng tiền: {$amount}", $qrcode);
+
+            if ($pttt == 1) {
+                $id_don_hang = add_don_hang($id_kh, $ten_nguoi_nhan, $email_nguoi_nhan, $sdt_nguoi_nhan, $dc_nguoi_nhan, $ghi_chu, $pttt, $amount, 0);
+                add_don_hang_chi_tiet($id_don_hang, $id_sp_kc_string, $so_luong_san_pham, $amount, $qrcode);
+                xoa_gio_hang($_SESSION["tai_khoan"]["id"]);
+            } else {
+                $id_don_hang = add_don_hang($id_kh, $ten_nguoi_nhan, $email_nguoi_nhan, $sdt_nguoi_nhan, $dc_nguoi_nhan, $ghi_chu, $pttt, $amount, $amount);
+                add_don_hang_chi_tiet($id_don_hang, $id_sp_kc_string, $so_luong_san_pham, $amount, $qrcode);
+                xoa_gio_hang($_SESSION["tai_khoan"]["id"]);
+            }
+        }
+        require_once "assets/PHPMailer/sendmail.php";
+        $VIEW = "assets/vnpay_php/vnpay_create_payment.php";
         break;
         // ========== THANH TOÁN ========== //
 

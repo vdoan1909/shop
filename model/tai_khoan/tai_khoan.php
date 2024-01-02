@@ -20,6 +20,14 @@ function all_tai_khoan($email, $mat_khau)
     return $tai_khoan;
 }
 
+function all_tai_khoan_email($email)
+{
+
+    $sql = "select * from tai_khoan where email like '%$email%' and trang_thai = 1";
+    $tai_khoan = pdo_query_one($sql);
+    return $tai_khoan;
+}
+
 function cap_nhat_tai_khoan($id, $anh, $ten, $email, $dia_chi)
 {
     if (!empty($anh)) {

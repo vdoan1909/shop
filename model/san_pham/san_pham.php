@@ -186,17 +186,3 @@ function san_pham_ban_them_gio_hang()
     $sp_bc = pdo_query($sql);
     return $sp_bc;
 }
-
-function san_pham_theo_trang($from, $row)
-{
-    $sql = "select * from san_pham  limit $from, $row";
-    $san_pham = pdo_query($sql);
-    return $san_pham;
-}
-
-function tong_san_pham_theo_trang()
-{
-    $sql = "select count(*) as totalProducts from san_pham";
-    $san_pham = pdo_query($sql);
-    return $san_pham;
-}

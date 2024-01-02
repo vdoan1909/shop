@@ -56,12 +56,6 @@ function update_so_luong_gio_hang($id, $so_luong)
     pdo_execute($sql, $so_luong, $id);
 }
 
-function update_san_pham_kich_co_gio_hang($id_kh, $id_sp_kc, $so_luong)
-{
-    $sql = "update gio_hang set so_luong = so_luong + ? where id_kh = ? and id_sp_kc = ?";
-    pdo_execute($sql, $so_luong, $id_kh, $id_sp_kc,);
-}
-
 function check_san_pham_gio_hang($id_kh, $id_sp_kc)
 {
     $sql = "select * from gio_hang where id_kh = ? and id_sp_kc = ?";

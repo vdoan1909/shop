@@ -10,7 +10,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 $arr_mat_khau = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-$thong_tin_tai_khoan = all_tai_khoan($email);
+$thong_tin_tai_khoan = all_tai_khoan_email($email);
 $email = $thong_tin_tai_khoan["email"];
 $mat_khau_rand = array_rand($arr_mat_khau, 4);
 $mat_khau_moi = [];
