@@ -19,7 +19,7 @@
                     <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
                         <div class="info">
                             <h4>Tổng khách hàng</h4>
-                            <p><b>56 khách hàng</b></p>
+                            <p><b><?= $tong_so_khach_hang["tong_khach_hang"] ?> khách hàng</b></p>
                             <p class="info-tong">Tổng số khách hàng được quản lý.</p>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                     <div class="widget-small info coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
                         <div class="info">
                             <h4>Tổng sản phẩm</h4>
-                            <p><b>1850 sản phẩm</b></p>
+                            <p><b><?= $tong_so_luong_san_pham_dang_co["so_luong_san_pham"] ?> sản phẩm</b></p>
                             <p class="info-tong">Tổng số sản phẩm được quản lý.</p>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                     <div class="widget-small warning coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
                         <div class="info">
                             <h4>Tổng đơn hàng</h4>
-                            <p><b>247 đơn hàng</b></p>
+                            <p><b><?= $tong_don_hang["tong_don_hang"] ?> đơn hàng</b></p>
                             <p class="info-tong">Tổng số hóa đơn bán hàng trong tháng.</p>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                     <div class="widget-small danger coloured-icon"><i class='icon bx bxs-error-alt fa-3x'></i>
                         <div class="info">
                             <h4>Sắp hết hàng</h4>
-                            <p><b>4 sản phẩm</b></p>
+                            <p><b><?= $sap_het_hang["sap_het_hang"] ?> sản phẩm</b></p>
                             <p class="info-tong">Số sản phẩm cảnh báo hết cần nhập thêm.</p>
                         </div>
                     </div>
@@ -118,35 +118,28 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Tên khách hàng</th>
-                                        <th>Ngày sinh</th>
-                                        <th>Số điện thoại</th>
+                                        <th>Ảnh</th>
+                                        <th>Địa chỉ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php foreach ($thong_ke_thai_khoan_moi as $tai_khoan) : ?>
                                     <tr>
-                                        <td>#183</td>
-                                        <td>Hột vịt muối</td>
-                                        <td>21/7/1992</td>
-                                        <td><span class="tag tag-success">0921387221</span></td>
+                                        <td><?= $tai_khoan["id"] ?></td>
+                                        <td><?= $tai_khoan["ten"] ?></td>
+                                        <td>
+                                            <?php if (isset($tai_khoan["anh"])) { ?>
+                                            <img style="width: 100px; height: 100px; object-fit: cover;"
+                                                src="../assets/upload/<?= $tai_khoan["anh"] ?>" alt="">
+                                            <?php } else { ?>
+                                            <img style="width: 84px; height: 84px; object-fit: cover; border-radius: 50%;"
+                                                src="https://inkythuatso.com/uploads/thumbnails/800/2023/03/8-anh-dai-dien-trang-inkythuatso-03-15-26-54.jpg"
+                                                alt="">
+                                            <?php } ?>
+                                        </td>
+                                        <td><span class="tag tag-success"><?= $tai_khoan["dia_chi"] ?></span></td>
                                     </tr>
-                                    <tr>
-                                        <td>#219</td>
-                                        <td>Bánh tráng trộn</td>
-                                        <td>30/4/1975</td>
-                                        <td><span class="tag tag-warning">0912376352</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#627</td>
-                                        <td>Cút rang bơ</td>
-                                        <td>12/3/1999</td>
-                                        <td><span class="tag tag-primary">01287326654</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>#175</td>
-                                        <td>Hủ tiếu nam vang</td>
-                                        <td>4/12/20000</td>
-                                        <td><span class="tag tag-danger">0912376763</span></td>
-                                    </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -184,7 +177,7 @@
     <div class="text-center" style="font-size: 13px">
         <p><b>Copyright
                 <script type="text/javascript">
-                    document.write(new Date().getFullYear());
+                document.write(new Date().getFullYear());
                 </script> Phần mềm quản lý bán hàng | Dev By Trường
             </b></p>
     </div>

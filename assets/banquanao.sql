@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 18, 2023 lúc 02:07 PM
+-- Thời gian đã tạo: Th1 02, 2024 lúc 12:37 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.0.28
 
@@ -50,12 +50,19 @@ CREATE TABLE `don_hang` (
   `sdt_nguoi_nhan` varchar(12) NOT NULL,
   `dc_nguoi_nhan` varchar(255) NOT NULL,
   `ghi_chu` text NOT NULL,
-  `id_pttt` int(11) NOT NULL,
-  `ngay_dat` date NOT NULL,
+  `pttt` varchar(50) NOT NULL,
+  `ngay_dat` date NOT NULL DEFAULT current_timestamp(),
   `tong_tien` int(11) NOT NULL,
   `tong_tien_da_tra` int(11) NOT NULL,
-  `id_tt_don_hang` int(11) NOT NULL
+  `id_tt_don_hang` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `don_hang`
+--
+
+INSERT INTO `don_hang` (`id`, `id_kh`, `ten_nguoi_nhan`, `email_nguoi_nhan`, `sdt_nguoi_nhan`, `dc_nguoi_nhan`, `ghi_chu`, `pttt`, `ngay_dat`, `tong_tien`, `tong_tien_da_tra`, `id_tt_don_hang`) VALUES
+(23, 3, 'Tôi k lấy', 'toiklay@gmail.com', '0333555999', 'America', 'Lấy 0 trả tiền', '2', '2024-01-02', 1550000, 1550000, 1);
 
 -- --------------------------------------------------------
 
@@ -66,10 +73,18 @@ CREATE TABLE `don_hang` (
 CREATE TABLE `don_hang_ct` (
   `id` int(11) NOT NULL,
   `id_don_hang` int(11) NOT NULL,
-  `id_sp_kc` int(11) NOT NULL,
+  `id_sp_kc` varchar(11) NOT NULL,
   `so_luong` int(11) NOT NULL,
-  `gia` int(11) NOT NULL
+  `gia` int(11) NOT NULL,
+  `qr` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `don_hang_ct`
+--
+
+INSERT INTO `don_hang_ct` (`id`, `id_don_hang`, `id_sp_kc`, `so_luong`, `gia`, `qr`) VALUES
+(10, 23, '89,37', 2, 1550000, 'assets/qr/1704192717.png');
 
 -- --------------------------------------------------------
 
@@ -83,13 +98,6 @@ CREATE TABLE `gio_hang` (
   `id_sp_kc` int(11) NOT NULL,
   `so_luong` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `gio_hang`
---
-
-INSERT INTO `gio_hang` (`id`, `id_kh`, `id_sp_kc`, `so_luong`) VALUES
-(1, 2, 29, 2);
 
 -- --------------------------------------------------------
 
@@ -323,8 +331,9 @@ CREATE TABLE `tai_khoan` (
 
 INSERT INTO `tai_khoan` (`id`, `anh`, `ten`, `email`, `mat_khau`, `dia_chi`, `role`, `trang_thai`) VALUES
 (1, NULL, NULL, 'admin@gmail.com', '1', NULL, 1, 1),
-(2, '212c07c4ee1847461e09.jpg', 'Bố Đoàn Đại CA', 'deocodau@gmail.com', '1', 'America', 0, 1),
-(3, NULL, NULL, 'accdemo1909@gmail.com', '2346', NULL, 0, 1);
+(2, '212c07c4ee1847461e09.jpg', 'Bố Đoàn Đại CA', 'dddoan1909@gmail.com', '1', 'America', 0, 1),
+(3, NULL, NULL, 'accdemo1909@gmail.com', '1', NULL, 0, 1),
+(7, NULL, NULL, 'doannvph33201@fpt.edu.vn', '1', NULL, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -414,8 +423,7 @@ ALTER TABLE `don_hang`
 --
 ALTER TABLE `don_hang_ct`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_dh_dhct` (`id_don_hang`),
-  ADD KEY `fk_spkc_dhct` (`id_sp_kc`);
+  ADD KEY `fk_dh_dhct` (`id_don_hang`);
 
 --
 -- Chỉ mục cho bảng `gio_hang`
@@ -491,19 +499,19 @@ ALTER TABLE `binh_luan`
 -- AUTO_INCREMENT cho bảng `don_hang`
 --
 ALTER TABLE `don_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `don_hang_ct`
 --
 ALTER TABLE `don_hang_ct`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `gio_hang`
 --
 ALTER TABLE `gio_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT cho bảng `kich_co`
@@ -533,7 +541,7 @@ ALTER TABLE `san_pham`
 -- AUTO_INCREMENT cho bảng `tai_khoan`
 --
 ALTER TABLE `tai_khoan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `the_loai`
@@ -575,8 +583,7 @@ ALTER TABLE `don_hang`
 -- Các ràng buộc cho bảng `don_hang_ct`
 --
 ALTER TABLE `don_hang_ct`
-  ADD CONSTRAINT `fk_dh_dhct` FOREIGN KEY (`id_don_hang`) REFERENCES `don_hang` (`id`),
-  ADD CONSTRAINT `fk_spkc_dhct` FOREIGN KEY (`id_sp_kc`) REFERENCES `sanpham_kichco` (`id`);
+  ADD CONSTRAINT `fk_dh_dhct` FOREIGN KEY (`id_don_hang`) REFERENCES `don_hang` (`id`);
 
 --
 -- Các ràng buộc cho bảng `gio_hang`

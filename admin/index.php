@@ -13,10 +13,17 @@ require_once "../model/kich_co/kich_co.php";
 require_once "../model/san_pham_kich_co/san_pham_kich_co.php";
 require_once "../model/trang_thai_don_hang/trang_thai_don_hang.php";
 require_once "../model/phuong_thuc_thanh_toan/phuong_thuc_thanh_toan.php";
+require_once "../model/don_hang/don_hang.php";
+require_once "../model/thong_ke/thong_ke.php";
 
 switch ($url) {
     case 'trang_chu':
         $title = "Trang chủ";
+        $tong_so_luong_san_pham_dang_co = tong_so_luong_san_pham_dang_co();
+        $tong_so_khach_hang = tong_so_khach_hang();
+        $sap_het_hang = sap_het_hang();
+        $tong_don_hang = tong_don_hang();
+        $thong_ke_thai_khoan_moi = thong_ke_thai_khoan_moi();
         $VIEW = "public/home.php";
         break;
 
@@ -492,8 +499,41 @@ switch ($url) {
         break;
         // ========== PHƯƠNG THỨC THANH TOÁN ========== //
 
+        // ========== ĐƠN HÀNG ========== //
+    case "ds_don_hang":
+        $title = "Quản lý đơn hàng";
+        $ds_don_hang = all_don_hang();
+        $VIEW = "don_hang/list.php";
+        break;
+
+    case "sua_don_hang":
+        $title = "Sửa đơn hàng";
+        $ct_don_hang = one_don_hang();
+        $all_trang_thai_don_hang = all_trang_thai_don_hang();
+        $VIEW = "don_hang/update.php";
+        break;
+
+    case "update_don_hang":
+        $title = "Sửa đơn hàng";
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            extract($_POST);
+
+            sua_don_hang($id, $ttdh);
+            $success = "Sửa thành công !";
+        }
+        $ct_don_hang = one_don_hang();
+        $all_trang_thai_don_hang = all_trang_thai_don_hang();
+        $VIEW = "don_hang/update.php";
+        break;
+        // ========== ĐƠN HÀNG ========== //
+
     default:
         $title = "Trang chủ";
+        $tong_so_luong_san_pham_dang_co = tong_so_luong_san_pham_dang_co();
+        $tong_so_khach_hang = tong_so_khach_hang();
+        $sap_het_hang = sap_het_hang();
+        $tong_don_hang = tong_don_hang();
+        $thong_ke_thai_khoan_moi = thong_ke_thai_khoan_moi();
         $VIEW = "public/home.php";
         break;
 }

@@ -118,6 +118,11 @@
                                                 <li class="menu-item akasha-MyAccount-navigation-link akasha-MyAccount-navigation-link--dashboard is-active">
                                                     <a href="index.php?url=cap_nhat_tai_khoan">Cập nhật tài khoản</a>
                                                 </li>
+                                                <?php if ($_SESSION["tai_khoan"]["role"] == 1) { ?>
+                                                    <li class="menu-item akasha-MyAccount-navigation-link akasha-MyAccount-navigation-link--customer-logout">
+                                                        <a href="index.php?url=admin">Đăng nhập admin</a>
+                                                    </li>
+                                                <?php } ?>
                                                 <li class="menu-item akasha-MyAccount-navigation-link akasha-MyAccount-navigation-link--customer-logout">
                                                     <a href="index.php?url=dang_xuat">Đăng xuất</a>
                                                 </li>
