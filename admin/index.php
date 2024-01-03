@@ -24,6 +24,7 @@ switch ($url) {
         $sap_het_hang = sap_het_hang();
         $tong_don_hang = tong_don_hang();
         $thong_ke_thai_khoan_moi = thong_ke_thai_khoan_moi();
+        $don_hang_moi = don_hang_moi();
         $VIEW = "public/home.php";
         break;
 
@@ -508,7 +509,7 @@ switch ($url) {
 
     case "sua_don_hang":
         $title = "Sửa đơn hàng";
-        $ct_don_hang = one_don_hang();
+        $ct_don_hang = one_don_hang($_GET["id_dh"]);
         $all_trang_thai_don_hang = all_trang_thai_don_hang();
         $VIEW = "don_hang/update.php";
         break;
@@ -518,10 +519,10 @@ switch ($url) {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             extract($_POST);
 
-            sua_don_hang($id, $ttdh);
+            sua_don_hang($id_dh, $ttdh);
             $success = "Sửa thành công !";
         }
-        $ct_don_hang = one_don_hang();
+        $ct_don_hang = one_don_hang($id_dh);
         $all_trang_thai_don_hang = all_trang_thai_don_hang();
         $VIEW = "don_hang/update.php";
         break;
@@ -534,6 +535,7 @@ switch ($url) {
         $sap_het_hang = sap_het_hang();
         $tong_don_hang = tong_don_hang();
         $thong_ke_thai_khoan_moi = thong_ke_thai_khoan_moi();
+        $don_hang_moi = don_hang_moi();
         $VIEW = "public/home.php";
         break;
 }

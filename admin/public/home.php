@@ -69,38 +69,38 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>AL3947</td>
-                                        <td>Phạm Thị Ngọc</td>
-                                        <td>
-                                            19.770.000 đ
-                                        </td>
-                                        <td><span class="badge bg-info">Chờ xử lý</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>ER3835</td>
-                                        <td>Nguyễn Thị Mỹ Yến</td>
-                                        <td>
-                                            16.770.000 đ
-                                        </td>
-                                        <td><span class="badge bg-warning">Đang vận chuyển</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>MD0837</td>
-                                        <td>Triệu Thanh Phú</td>
-                                        <td>
-                                            9.400.000 đ
-                                        </td>
-                                        <td><span class="badge bg-success">Đã hoàn thành</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>MT9835</td>
-                                        <td>Đặng Hoàng Phúc </td>
-                                        <td>
-                                            40.650.000 đ
-                                        </td>
-                                        <td><span class="badge bg-danger">Đã hủy </span></td>
-                                    </tr>
+                                    <?php foreach ($don_hang_moi as $don_hang_moi) :
+                                        $fm_tong_tien = number_format($don_hang_moi["tong_tien"], 0, ',', '.');
+
+                                        $class_ttdh = "";
+                                        switch ($don_hang_moi["id_tt_don_hang"]) {
+                                            case '1':
+                                                $class_ttdh = "bg-info";
+                                                break;
+                                            case '2';
+                                                $class_ttdh = "bg-xacnhan";
+                                                break;
+                                            case '3':
+                                                $class_ttdh = "bg-warning";
+                                                break;
+                                            case '4':
+                                                $class_ttdh = "bg-success";
+                                                break;
+                                            case '5':
+                                                $class_ttdh = "bg-danger";
+                                                break;
+                                        }
+                                    ?>
+                                        <tr>
+                                            <td><?= $don_hang_moi["id"] ?></td>
+                                            <td><?= $don_hang_moi["ten_nguoi_nhan"] ?></td>
+                                            <td>
+                                                <?= $fm_tong_tien ?>
+                                            </td>
+                                            <td><span class="badge <?= $class_ttdh ?>"><?= $don_hang_moi["ttdh"] ?></span>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -124,21 +124,18 @@
                                 </thead>
                                 <tbody>
                                     <?php foreach ($thong_ke_thai_khoan_moi as $tai_khoan) : ?>
-                                    <tr>
-                                        <td><?= $tai_khoan["id"] ?></td>
-                                        <td><?= $tai_khoan["ten"] ?></td>
-                                        <td>
-                                            <?php if (isset($tai_khoan["anh"])) { ?>
-                                            <img style="width: 100px; height: 100px; object-fit: cover;"
-                                                src="../assets/upload/<?= $tai_khoan["anh"] ?>" alt="">
-                                            <?php } else { ?>
-                                            <img style="width: 84px; height: 84px; object-fit: cover; border-radius: 50%;"
-                                                src="https://inkythuatso.com/uploads/thumbnails/800/2023/03/8-anh-dai-dien-trang-inkythuatso-03-15-26-54.jpg"
-                                                alt="">
-                                            <?php } ?>
-                                        </td>
-                                        <td><span class="tag tag-success"><?= $tai_khoan["dia_chi"] ?></span></td>
-                                    </tr>
+                                        <tr>
+                                            <td><?= $tai_khoan["id"] ?></td>
+                                            <td><?= $tai_khoan["ten"] ?></td>
+                                            <td>
+                                                <?php if (isset($tai_khoan["anh"])) { ?>
+                                                    <img style="width: 100px; height: 100px; object-fit: cover;" src="../assets/upload/<?= $tai_khoan["anh"] ?>" alt="">
+                                                <?php } else { ?>
+                                                    <img style="width: 84px; height: 84px; object-fit: cover; border-radius: 50%;" src="https://inkythuatso.com/uploads/thumbnails/800/2023/03/8-anh-dai-dien-trang-inkythuatso-03-15-26-54.jpg" alt="">
+                                                <?php } ?>
+                                            </td>
+                                            <td><span class="tag tag-success"><?= $tai_khoan["dia_chi"] ?></span></td>
+                                        </tr>
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
@@ -177,7 +174,7 @@
     <div class="text-center" style="font-size: 13px">
         <p><b>Copyright
                 <script type="text/javascript">
-                document.write(new Date().getFullYear());
+                    document.write(new Date().getFullYear());
                 </script> Phần mềm quản lý bán hàng | Dev By Trường
             </b></p>
     </div>

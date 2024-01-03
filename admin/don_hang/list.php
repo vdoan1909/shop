@@ -31,33 +31,32 @@
                         <tbody>
                             <?php foreach ($ds_don_hang as $don_hang) :
                                 extract($don_hang);
-                                $sua_don_hang = "index.php?url=sua_don_hang&id=" . $id;
+                                $sua_don_hang = "index.php?url=sua_don_hang&id_dh=" . $id;
                                 $fm_tong_tien = number_format($tong_tien, 0, ',', '.');
                                 $fm_tong_tien_da_tra = number_format($tong_tien_da_tra, 0, ',', '.');
                                 $fm_ngay_dat = date("d-m-Y", strtotime($ngay_dat));
                             ?>
-                            <tr>
-                                <td><?= $id ?></td>
-                                <td><?= $email ?></td>
-                                <td><?= $ten_nguoi_nhan ?></td>
-                                <td><?= $email_nguoi_nhan ?></td>
-                                <td><?= $sdt_nguoi_nhan ?></td>
-                                <td><?= $dc_nguoi_nhan ?></td>
-                                <td><?= $ghi_chu ?></td>
-                                <td><?= $pttt ?></td>
-                                <td><?= $fm_ngay_dat ?></td>
-                                <td><?= $fm_tong_tien ?> VND</td>
-                                <td><?= $fm_tong_tien_da_tra ?> VND</td>
-                                <td><?= $ttdh ?></td>
-                                <td>
-                                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
-                                        data-toggle="modal" data-target="#ModalUP">
-                                        <a style="color: #f59d39;" href="<?= $sua_don_hang ?>">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                    </button>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td><?= $id ?></td>
+                                    <td><?= $email ?></td>
+                                    <td><?= $ten_nguoi_nhan ?></td>
+                                    <td><?= $email_nguoi_nhan ?></td>
+                                    <td><?= $sdt_nguoi_nhan ?></td>
+                                    <td><?= $dc_nguoi_nhan ?></td>
+                                    <td><?= $ghi_chu ?></td>
+                                    <td><?= $pttt ?></td>
+                                    <td><?= $fm_ngay_dat ?></td>
+                                    <td><?= $fm_tong_tien ?> VND</td>
+                                    <td><?= $fm_tong_tien_da_tra ?> VND</td>
+                                    <td><?= $ttdh ?></td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal" data-target="#ModalUP">
+                                            <a style="color: #f59d39;" href="<?= $sua_don_hang ?>">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </button>
+                                    </td>
+                                </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>

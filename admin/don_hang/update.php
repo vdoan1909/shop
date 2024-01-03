@@ -20,7 +20,7 @@ $fm_ngay_dat = date("d-m-Y", strtotime($ngay_dat));
                     <div class="row">
                         <div class="form-group  col-md-4">
                             <label class="control-label">Mã đơn hàng</label>
-                            <input name="id" value="<?= $id ?>" class="form-control" type="text" readonly>
+                            <input name="id_dh" value="<?= $id ?>" class="form-control" type="text" readonly>
                         </div>
                         <div class="form-group  col-md-4">
                             <label class="control-label">Email khách hàng</label>
@@ -65,12 +65,11 @@ $fm_ngay_dat = date("d-m-Y", strtotime($ngay_dat));
                         <div class="form-group col-md-4">
                             <label for="exampleSelect1" class="control-label">Trạng thái</label>
                             <select name="ttdh" class="form-control" id="exampleSelect1">
-                                <option value="<?= $id_tt_don_hang ?>"><?= $ttdh ?>
+                                <option value="<?= $ct_don_hang["id_tt_don_hang"] ?>"><?= $ct_don_hang["ttdh"] ?>
                                 </option>
-                                <?php foreach ($all_trang_thai_don_hang as $trang_thai_don_hang) :
-                                    extract($trang_thai_don_hang);
-                                ?>
-                                    <option value="<?= $id ?>"><?= $trang_thai_don_hang ?></option>
+                                <?php foreach ($all_trang_thai_don_hang as $trang_thai_don_hang) : ?>
+                                    <option value="<?= $trang_thai_don_hang["id"] ?>">
+                                        <?= $trang_thai_don_hang["trang_thai_don_hang"] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
