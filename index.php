@@ -140,16 +140,19 @@ switch ($url) {
             }
 
             $path = "assets/qr/";
-            $qrcode = $path . time() . ".png";
-            QRcode::png("Email: {$email_kh}, Thông tin sản phẩm: {$noi_dung_qr}, Tổng tiền: {$amount}", $qrcode);
+            $qrcodeFileName = time() . ".png";
+            $qrcodeFullPath = $path . $qrcodeFileName;
+
+            QRcode::png("Email: {$email_kh}, Thông tin sản phẩm: {$noi_dung_qr}, Tổng tiền: {$amount}", $qrcodeFullPath);
+
 
             if ($pttt == 1) {
                 $id_don_hang = add_don_hang($id_kh, $ten_nguoi_nhan, $email_nguoi_nhan, $sdt_nguoi_nhan, $dc_nguoi_nhan, $ghi_chu, $pttt, $amount, 0);
-                add_don_hang_chi_tiet($id_don_hang, $id_sp_kc_string, $so_luong_san_pham, $amount, $qrcode);
+                add_don_hang_chi_tiet($id_don_hang, $id_sp_kc_string, $so_luong_san_pham, $amount, $qrcodeFileName);
                 xoa_gio_hang($_SESSION["tai_khoan"]["id"]);
             } else {
                 $id_don_hang = add_don_hang($id_kh, $ten_nguoi_nhan, $email_nguoi_nhan, $sdt_nguoi_nhan, $dc_nguoi_nhan, $ghi_chu, $pttt, $amount, $amount);
-                add_don_hang_chi_tiet($id_don_hang, $id_sp_kc_string, $so_luong_san_pham, $amount, $qrcode);
+                add_don_hang_chi_tiet($id_don_hang, $id_sp_kc_string, $so_luong_san_pham, $amount, $qrcodeFileName);
                 xoa_gio_hang($_SESSION["tai_khoan"]["id"]);
             }
         }

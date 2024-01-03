@@ -74,7 +74,7 @@
 
         <li>
 
-            <a class="app-menu__item" href="page-calendar.html">
+            <a class="app-menu__item" href="index.php?url=lich_cong_tac">
                 <i class='app-menu__icon bx bx-calendar-check'></i>
                 <span class="app-menu__label">Lịch công tác </span>
             </a>

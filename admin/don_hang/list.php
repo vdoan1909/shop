@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="tile">
-                <div class="tile-body">
+                <div class="tile-body table-responsive">
                     <table class="table table-hover table-bordered" id="sampleTable">
                         <thead>
                             <tr>
@@ -25,6 +25,7 @@
                                 <th>Tổng tiền</th>
                                 <th>Tổng tiền đã trả</th>
                                 <th>Trạng thái</th>
+                                <th>Mã QR</th>
                                 <th>##</th>
                             </tr>
                         </thead>
@@ -35,6 +36,25 @@
                                 $fm_tong_tien = number_format($tong_tien, 0, ',', '.');
                                 $fm_tong_tien_da_tra = number_format($tong_tien_da_tra, 0, ',', '.');
                                 $fm_ngay_dat = date("d-m-Y", strtotime($ngay_dat));
+
+                                $class_ttdh = "";
+                                switch ($id_tt_don_hang) {
+                                    case '1':
+                                        $class_ttdh = "bg-info";
+                                        break;
+                                    case '2';
+                                        $class_ttdh = "bg-xacnhan";
+                                        break;
+                                    case '3':
+                                        $class_ttdh = "bg-warning";
+                                        break;
+                                    case '4':
+                                        $class_ttdh = "bg-success";
+                                        break;
+                                    case '5':
+                                        $class_ttdh = "bg-danger";
+                                        break;
+                                }
                             ?>
                                 <tr>
                                     <td><?= $id ?></td>
@@ -48,7 +68,12 @@
                                     <td><?= $fm_ngay_dat ?></td>
                                     <td><?= $fm_tong_tien ?> VND</td>
                                     <td><?= $fm_tong_tien_da_tra ?> VND</td>
-                                    <td><?= $ttdh ?></td>
+                                    <td>
+                                        <span class="badge <?= $class_ttdh ?>"><?= $ttdh ?></span>
+                                    </td>
+                                    <td>
+                                        <img style="width: 200px; height: 200px; object-fit: cover;" src="../assets/qr/<?= $qr ?>" alt="">
+                                    </td>
                                     <td>
                                         <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal" data-target="#ModalUP">
                                             <a style="color: #f59d39;" href="<?= $sua_don_hang ?>">

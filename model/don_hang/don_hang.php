@@ -21,8 +21,9 @@ function xoa_gio_hang($id_kh)
 function all_don_hang()
 {
     $sql = "select don_hang.*, tai_khoan.email as email, phuong_thuc_thanh_toan.pttt as pttt,
-    trang_thai_don_hang.trang_thai_don_hang as ttdh from don_hang 
+    trang_thai_don_hang.trang_thai_don_hang as ttdh, don_hang_ct.qr as qr from don_hang 
     join tai_khoan on tai_khoan.id = don_hang.id_kh 
+    join don_hang_ct on don_hang_ct.id_don_hang = don_hang.id 
     join phuong_thuc_thanh_toan on phuong_thuc_thanh_toan.id = don_hang.pttt 
     join trang_thai_don_hang on trang_thai_don_hang.id = don_hang.id_tt_don_hang";
     $don_hang = pdo_query($sql);

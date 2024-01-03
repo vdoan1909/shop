@@ -23,7 +23,8 @@ require_once("config.php");
                 </div>
                 <div class="form-group">
                     <label for="order_id">Mã hóa đơn</label>
-                    <input class="form-control" id="order_id" name="order_id" type="text" value="<?php echo date("YmdHis") ?>" />
+                    <input class="form-control" id="order_id" name="order_id" type="text"
+                        value="<?php echo date("YmdHis") ?>" />
                 </div>
                 <div class="form-group">
                     <label for="ten_nguoi_nhan">Tên người nhận</label>
@@ -50,17 +51,19 @@ require_once("config.php");
                     <select name="pttt" id="bank_code" class="form-control">
                         <option value="" disabled selected>--- PHƯƠNG THỨC THANH TOÁN ---</option>
                         <?php foreach ($all_phuong_thuc_thanh_toan as $pttt) : ?>
-                            <option value="<?= $pttt['id'] ?>"><?= $pttt['pttt'] ?></option>
+                        <option value="<?= $pttt['id'] ?>"><?= $pttt['pttt'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="amount">Số tiền</label>
-                    <input class="form-control" id="amount" name="amount" type="number" value="<?= $tong_gia_gio_hang ?>" />
+                    <input class="form-control" id="amount" name="amount" type="number"
+                        value="<?= $tong_gia_gio_hang ?>" />
                 </div>
                 <div class="form-group">
                     <label for="so_luong_san_pham">Số lượng</label>
-                    <input class="form-control" id="amount" name="so_luong_san_pham" type="number" value="<?= $tong_sl_sp ?>" />
+                    <input class="form-control" id="amount" name="so_luong_san_pham" type="number"
+                        value="<?= $tong_sl_sp ?>" readonly />
                 </div>
                 <div class="form-group">
                     <label for="order_desc">Nội dung thanh toán</label>
@@ -103,7 +106,8 @@ require_once("config.php");
                 </div>
                 <div class="form-group">
                     <label>Thời hạn thanh toán</label>
-                    <input class="form-control" id="txtexpire" name="txtexpire" type="text" value="<?php echo $expire; ?>" />
+                    <input class="form-control" id="txtexpire" name="txtexpire" type="text"
+                        value="<?php echo $expire; ?>" />
                 </div>
 
                 <div class="form-group">
@@ -112,7 +116,8 @@ require_once("config.php");
 
                 <div class="form-group">
                     <label>Email (*)</label>
-                    <input class="form-control" id="txt_billing_email" name="txt_billing_email" type="text" value="<?= $_SESSION['tai_khoan']['email'] ?>" />
+                    <input class="form-control" id="txt_billing_email" name="txt_billing_email" type="text"
+                        value="<?= $_SESSION['tai_khoan']['email'] ?>" />
                 </div>
                 <button type="submit" name="redirect" id="redirect" class="btn btn-primary">Thanh
                     toán trực tuyến</button>
