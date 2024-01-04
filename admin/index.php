@@ -162,7 +162,10 @@ switch ($url) {
         // Danh sách
     case "ds_san_pham":
         $title = "Danh sách sản phẩm";
-        $ds_san_pham = all_san_pham();
+        $kyw = isset($_POST["ten_san_pham"]) ? $_POST["ten_san_pham"] : "";
+        $id_tl = isset($_POST["the_loai"]) ? $_POST["the_loai"] : 0;
+        $ds_san_pham = all_san_pham($kyw, $id_tl);
+        $ds_the_loai = all_the_loai();
         $VIEW = "san_pham/list.php";
         break;
 

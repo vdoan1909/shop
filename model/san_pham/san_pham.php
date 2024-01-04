@@ -1,24 +1,36 @@
 <?php
-function all_san_pham()
+function all_san_pham($kyw, $id_tl)
 {
     $sql = "select san_pham.*, the_loai.ten_loai as ten_loai, the_loai.trang_thai as trang_thai_tl, thuong_hieu.ten_thuong_hieu as ten_thuong_hieu, thuong_hieu.trang_thai as trang_thai_th 
     from san_pham 
     join the_loai on the_loai.id = san_pham.id_the_loai 
-    join thuong_hieu on thuong_hieu.id = san_pham.id_thuong_hieu 
-    order by san_pham.id desc";
+    join thuong_hieu on thuong_hieu.id = san_pham.id_thuong_hieu ";
+    if (!empty($kyw)) {
+        $sql .= " and san_pham.ten like '%$kyw%'";
+    }
+    if ($id_tl != 0) {
+        $sql .= " and the_loai.id = $id_tl";
+    }
+    $sql .= " order by san_pham.id desc";
     $san_pham = pdo_query($sql);
     return $san_pham;
 }
 
-function all_san_pham_view()
+function all_san_pham_view($kyw, $id_tl)
 {
     $sql = "select distinct san_pham.*, sanpham_kichco.id as id_sp_kc, sanpham_kichco.gia, the_loai.id as id_tl, the_loai.ten_loai as ten_loai, the_loai.trang_thai as trang_thai_tl, thuong_hieu.id as id_th, thuong_hieu.ten_thuong_hieu as ten_thuong_hieu, thuong_hieu.trang_thai as trang_thai_th 
     from san_pham 
     join the_loai on the_loai.id = san_pham.id_the_loai 
     join thuong_hieu on thuong_hieu.id = san_pham.id_thuong_hieu 
     join sanpham_kichco on sanpham_kichco.id_sp = san_pham.id 
-    where san_pham.trang_thai = 1 and the_loai.trang_thai = 1 and thuong_hieu.trang_thai = 1 
-    group by san_pham.id";
+    where san_pham.trang_thai = 1 and the_loai.trang_thai = 1 and thuong_hieu.trang_thai = 1 ";
+    if (!empty($kyw)) {
+        $sql .= " and san_pham.ten like '%$kyw%'";
+    }
+    if ($id_tl != 0) {
+        $sql .= " and the_loai.id = $id_tl";
+    }
+    $sql .= " group by san_pham.id";
     $san_pham = pdo_query($sql);
     return $san_pham;
 }

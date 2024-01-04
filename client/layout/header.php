@@ -80,32 +80,26 @@
                                             </a>
                                         </div>
                                         <div class="block-search">
-                                            <form role="search" method="get" class="form-search block-search-form akasha-live-search-form">
+                                            <form action="index.php" role="search" method="get" class="form-search block-search-form akasha-live-search-form">
+                                                <input type="hidden" name="url" value="ds_san_pham">
                                                 <div class="form-content search-box results-search">
                                                     <div class="inner">
-                                                        <input autocomplete="off" class="searchfield txt-livesearch input" name="s" value="" placeholder="Search here..." type="text">
+                                                        <input autocomplete="off" class="searchfield txt-livesearch input" name="ten_san_pham" value="" placeholder="Tìm kiếm..." type="text">
                                                     </div>
                                                 </div>
-                                                <input name="post_type" value="product" type="hidden">
-                                                <input name="taxonomy" value="product_cat" type="hidden">
                                                 <div class="category">
-                                                    <select title="product_cat" name="product_cat" id="64788262" class="category-search-option" tabindex="-1" style="display: none;">
-                                                        <option value="0">All Categories</option>
-                                                        <option class="level-0" value="light">Shoes</option>
-                                                        <option class="level-0" value="chair">Accessories</option>
-                                                        <option class="level-0" value="table">Bags</option>
-                                                        <option class="level-0" value="bed">Life style</option>
-                                                        <option class="level-0" value="new-arrivals">New arrivals
-                                                        </option>
-                                                        <option class="level-0" value="lamp">Summer Sale</option>
-                                                        <option class="level-0" value="specials">Specials</option>
-                                                        <option class="level-0" value="sofas">Women</option>
+                                                    <select title="product_cat" name="the_loai" id="64788262" class="category-search-option" tabindex="-1" style="display: none;">
+                                                        <option value="0">Tất cả thể loại</option>
+                                                        <?php foreach ($ds_the_loai as $the_loai) : ?>
+                                                            <option value="<?= $the_loai["id"] ?>">
+                                                                <?= $the_loai["ten_loai"] ?></option>
+                                                        <?php endforeach; ?>
                                                     </select>
                                                 </div>
                                                 <button type="submit" class="btn-submit">
                                                     <span class="flaticon-magnifying-glass-1"></span>
                                                 </button>
-                                            </form><!-- block search -->
+                                            </form>
                                         </div>
                                     </div>
                                     <div class="akasha-dropdown-close">x</div>

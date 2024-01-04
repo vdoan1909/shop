@@ -4,6 +4,7 @@ session_start();
 $url = isset($_GET['url']) ? $_GET['url'] : "";
 
 require_once "model/pdo.php";
+require_once "model/the_loai/the_loai.php";
 require_once "model/san_pham/san_pham.php";
 require_once "model/san_pham_kich_co/san_pham_kich_co.php";
 require_once "model/tai_khoan/tai_khoan.php";
@@ -15,6 +16,8 @@ if (isset($_SESSION["tai_khoan"]["id"])) {
     $so_luong_san_pham_gio_hang = so_luong_san_pham_gio_hang($_SESSION["tai_khoan"]["id"]);
     $ds_san_pham_gio_hang = san_pham_gio_hang($_SESSION["tai_khoan"]["id"]);
 }
+
+$ds_the_loai = all_the_loai();
 
 switch ($url) {
         // ========== TRANG CHỦ ========== //
@@ -30,7 +33,9 @@ switch ($url) {
         // Danh sách sản phẩm
     case "ds_san_pham":
         $title = "Danh sách sản phẩm";
-        $ds_san_pham = all_san_pham_view();
+        $kyw = isset($_GET["ten_san_pham"]) ? $_GET["ten_san_pham"] : "";
+        $id_tl = isset($_GET["the_loai"]) ? $_GET["the_loai"] : 0;
+        $ds_san_pham = all_san_pham_view($kyw, $id_tl);
         $VIEW = "client/product/danh_sach_san_pham.php";
         break;
 
