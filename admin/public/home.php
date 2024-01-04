@@ -117,7 +117,7 @@
                                     <?php foreach ($thong_ke_thai_khoan_moi as $tai_khoan) : ?>
                                         <tr>
                                             <td><?= $tai_khoan["id"] ?></td>
-                                            <td><?= $tai_khoan["ten"] ?></td>
+                                            <td><?= isset($tai_khoan["ten"]) ? $tai_khoan["ten"] : "Chưa cập nhật" ?></td>
                                             <td>
                                                 <?php if (isset($tai_khoan["anh"])) { ?>
                                                     <img style="width: 100px; height: 100px; object-fit: cover;" src="../assets/upload/<?= $tai_khoan["anh"] ?>" alt="">
@@ -125,7 +125,9 @@
                                                     <img style="width: 84px; height: 84px; object-fit: cover; border-radius: 50%;" src="https://inkythuatso.com/uploads/thumbnails/800/2023/03/8-anh-dai-dien-trang-inkythuatso-03-15-26-54.jpg" alt="">
                                                 <?php } ?>
                                             </td>
-                                            <td><span class="tag tag-success"><?= $tai_khoan["dia_chi"] ?></span></td>
+                                            <td>
+                                                <span class="tag tag-success"><?= isset($tai_khoan["dia_chi"]) ? $tai_khoan["dia_chi"] : "Chưa cập nhật" ?></span>
+                                            </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>

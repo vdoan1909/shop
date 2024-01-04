@@ -29,7 +29,7 @@ function tong_don_hang()
 
 function thong_ke_thai_khoan_moi()
 {
-    $sql = "select * from tai_khoan";
+    $sql = "select * from tai_khoan where role = 0";
     $so_luong = pdo_query($sql);
     return $so_luong;
 }

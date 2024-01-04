@@ -56,3 +56,17 @@ function quen_mat_khau($id_tk, $mat_khau_moi)
     $sql = "update tai_khoan set mat_khau = ? where id = ?";
     pdo_execute($sql, $mat_khau_moi, $id_tk);
 }
+
+function ds_quan_tri()
+{
+    $sql = "select * from tai_khoan where role = 1 and trang_thai = 1";
+    $quan_tri = pdo_query($sql);
+    return $quan_tri;
+}
+
+function ds_khach_hang()
+{
+    $sql = "select * from tai_khoan where role = 0";
+    $khach_hang = pdo_query($sql);
+    return $khach_hang;
+}

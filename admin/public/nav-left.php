@@ -1,9 +1,15 @@
 <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="../assets/images_sanpham/anhcuatao.jpg"
-            width="60px" alt="User Image">
+    <div class="app-sidebar__user">
+        <?php if (isset($thong_tin_quan_tri["anh"])) { ?>
+            <img class="app-sidebar__user-avatar" src="../assets/images_sanpham/<?= $thong_tin_quan_tri["anh"] ?>" width="60px" alt="User Image">
+        <?php } else { ?>
+            <img style="width: 84px; height: 84px; object-fit: cover; border-radius: 50%;" src="https://inkythuatso.com/uploads/thumbnails/800/2023/03/8-anh-dai-dien-trang-inkythuatso-03-15-26-54.jpg" alt="">
+        <?php } ?>
         <div>
-            <p class="app-sidebar__user-name"><b>Nguyễn Văn Đoàn</b></p>
+            <p class="app-sidebar__user-name">
+                <b><?= isset($thong_tin_quan_tri["ten"]) ? $thong_tin_quan_tri["ten"] : "ADMIN" ?></b>
+            </p>
             <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
         </div>
     </div>
@@ -13,6 +19,27 @@
             <a class="app-menu__item" href="index.php">
                 <i class='app-menu__icon bx bx-tachometer'></i>
                 <span class="app-menu__label">Bảng điều khiển</span>
+            </a>
+        </li>
+
+        <li>
+            <a class="app-menu__item " href="index.php?url=ds_quan_tri">
+                <i class="app-menu__icon fa fa-user-shield"></i>
+                <span class="app-menu__label">Quản lý quản trị</span>
+            </a>
+        </li>
+
+        <li>
+            <a class="app-menu__item " href="#">
+                <i class="app-menu__icon fa fa-user-tie"></i>
+                <span class="app-menu__label">Quản lý nhân viên</span>
+            </a>
+        </li>
+
+        <li>
+            <a class="app-menu__item " href="index.php?url=ds_khach_hang">
+                <i class="app-menu__icon fa fa-user"></i>
+                <span class="app-menu__label">Quản lý khách hàng</span>
             </a>
         </li>
 
@@ -74,7 +101,7 @@
 
         <li>
 
-            <a class="app-menu__item" href="index.php?url=lich_cong_tac">
+            <a class="app-menu__item" href="#">
                 <i class='app-menu__icon bx bx-calendar-check'></i>
                 <span class="app-menu__label">Lịch công tác </span>
             </a>

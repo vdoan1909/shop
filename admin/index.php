@@ -1,10 +1,13 @@
 <?php
 ob_start();
 session_start();
+
 if ($_SESSION["tai_khoan"]["role"] !=  1) {
     header("location: ../index.php");
 }
+
 $url = isset($_GET['url']) ? $_GET['url'] : "";
+
 require_once "../model/pdo.php";
 require_once "../model/the_loai/the_loai.php";
 require_once "../model/thuong_hieu/thuong_hieu.php";
@@ -14,7 +17,11 @@ require_once "../model/san_pham_kich_co/san_pham_kich_co.php";
 require_once "../model/trang_thai_don_hang/trang_thai_don_hang.php";
 require_once "../model/phuong_thuc_thanh_toan/phuong_thuc_thanh_toan.php";
 require_once "../model/don_hang/don_hang.php";
+require_once "../model/quan_tri/quan_tri.php";
+require_once "../model/tai_khoan/tai_khoan.php";
 require_once "../model/thong_ke/thong_ke.php";
+
+$thong_tin_quan_tri = quan_tri($_SESSION["tai_khoan"]["id"]);
 
 switch ($url) {
     case 'trang_chu':
@@ -530,6 +537,24 @@ switch ($url) {
         $VIEW = "don_hang/update.php";
         break;
         // ========== ĐƠN HÀNG ========== //
+
+        // ========== TÀI KHOẢN ========== //
+        // Quản trị
+    case "ds_quan_tri":
+        $title = "Danh sách quản trị";
+        $ds_quan_tri = ds_quan_tri();
+        $VIEW = "quan_tri/list.php";
+        break;
+
+        // Nhân viên
+
+        // Khách hàng
+    case "ds_khach_hang":
+        $title = "Danh sách khách hàng";
+        $ds_khach_hang = ds_khach_hang();
+        $VIEW = "khach_hang/list.php";
+        break;
+        // ========== TÀI KHOẢN ========== //
 
     default:
         $title = "Trang chủ";
