@@ -25,7 +25,6 @@
                                 <th>Tổng tiền</th>
                                 <th>Tổng tiền đã trả</th>
                                 <th>Trạng thái</th>
-                                <th>Mã QR</th>
                                 <th>##</th>
                             </tr>
                         </thead>
@@ -56,32 +55,30 @@
                                         break;
                                 }
                             ?>
-                                <tr>
-                                    <td><?= $id ?></td>
-                                    <td><?= $email ?></td>
-                                    <td><?= $ten_nguoi_nhan ?></td>
-                                    <td><?= $email_nguoi_nhan ?></td>
-                                    <td><?= $sdt_nguoi_nhan ?></td>
-                                    <td><?= $dc_nguoi_nhan ?></td>
-                                    <td><?= $ghi_chu ?></td>
-                                    <td><?= $pttt ?></td>
-                                    <td><?= $fm_ngay_dat ?></td>
-                                    <td><?= $fm_tong_tien ?> VND</td>
-                                    <td><?= $fm_tong_tien_da_tra ?> VND</td>
-                                    <td>
-                                        <span class="badge <?= $class_ttdh ?>"><?= $ttdh ?></span>
-                                    </td>
-                                    <td>
-                                        <img style="width: 200px; height: 200px; object-fit: cover;" src="../assets/qr/<?= $qr ?>" alt="">
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal" data-target="#ModalUP">
-                                            <a style="color: #f59d39;" href="<?= $sua_don_hang ?>">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                        </button>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td><?= $id ?></td>
+                                <td><?= $email ?></td>
+                                <td><?= $ten_nguoi_nhan ?></td>
+                                <td><?= $email_nguoi_nhan ?></td>
+                                <td><?= $sdt_nguoi_nhan ?></td>
+                                <td><?= $dc_nguoi_nhan ?></td>
+                                <td><?= $ghi_chu ?></td>
+                                <td><?= $pttt ?></td>
+                                <td><?= $fm_ngay_dat ?></td>
+                                <td><?= $fm_tong_tien ?> VND</td>
+                                <td><?= $fm_tong_tien_da_tra ?> VND</td>
+                                <td>
+                                    <span class="badge <?= $class_ttdh ?>"><?= $ttdh ?></span>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp"
+                                        data-toggle="modal" data-target="#ModalUP">
+                                        <a style="color: #f59d39;" href="<?= $sua_don_hang ?>">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    </button>
+                                </td>
+                            </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>

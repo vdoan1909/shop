@@ -613,6 +613,22 @@ switch ($url) {
         break;
         // ========== TÀI KHOẢN ========== //
 
+        // ========== DOANH THU ========== //
+    case "bao_cao_doanh_thu":
+        $title = "Báo cáo doanh thu";
+        $tong_nhan_vien = tong_nhan_vien();
+        $tong_so_luong_san_pham_dang_co = tong_so_luong_san_pham_dang_co();
+        $tong_don_hang = tong_don_hang();
+        $tai_khoan_bi_cam = tai_khoan_bi_cam();
+        $tong_thu_nhap = tong_thu_nhap();
+        $sap_het_hang = sap_het_hang();
+        $don_hang_bi_huy = don_hang_bi_huy();
+        $san_pham_ban_chay_thong_ke = san_pham_ban_chay_thong_ke();
+        $san_pham_da_het = san_pham_da_het();
+        $VIEW = "bao_cao_doanh_thu/bao_cao_doanh_thu.php";
+        break;
+        // ========== DOANH THU ========== //
+
     default:
         $title = "Trang chủ";
         $tong_so_luong_san_pham_dang_co = tong_so_luong_san_pham_dang_co();
