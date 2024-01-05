@@ -1,7 +1,7 @@
 <?php
 function tong_so_luong_san_pham_dang_co()
 {
-    $sql = "select sum(so_luong) as so_luong_san_pham from sanpham_kichco";
+    $sql = "select sum(so_luong) as so_luong_san_pham from sanpham_kichco;";
     $so_luong = pdo_query_one($sql);
     return $so_luong;
 }

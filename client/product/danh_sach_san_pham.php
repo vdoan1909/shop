@@ -7,6 +7,39 @@
 </div>
 <div class="main-container shop-page no-sidebar">
     <div class="container">
+        <form action="index.php" class="row" method="get">
+            <input type="hidden" name="url" value="ds_san_pham">
+            <div class="col-sm-12 col-md-6">
+                <div class="dataTables_length" id="sampleTable_length">
+                    <label>Thể loại
+                        <select id="lengthSelector" name="the_loai" aria-controls="sampleTable"
+                            class="form-control form-control-sm" fdprocessedid="3g6j95">
+                            <option value="0"
+                                <?= !isset($_GET["the_loai"]) || (isset($_GET["the_loai"]) && $_GET["the_loai"] == 0) ? 'selected' : '' ?>>
+                                Tất cả
+                            </option>
+                            <?php foreach ($ds_the_loai as $the_loai) : ?>
+                            <option value="<?= $the_loai["id"] ?>"
+                                <?= isset($_GET["the_loai"]) && $_GET["the_loai"] == $the_loai["id"] ? 'selected' : '' ?>>
+                                <?= $the_loai["ten_loai"] ?>
+                            </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div id="sampleTable_filter" class="dataTables_filter">
+                    <label>Tìm kiếm:
+                        <input type="text" name="ten_san_pham" class="form-control form-control-sm"
+                            aria-controls="sampleTable"
+                            value="<?= isset($_GET["ten_san_pham"]) ? $_GET["ten_san_pham"] : '' ?>">
+                    </label>
+                    <button style="height: 48px;" class="btn btn-save" type="submit">Tìm kiếm</button>
+                </div>
+            </div>
+        </form>
+
         <div class="row">
             <div class="auto-clear equal-container better-height akasha-products">
                 <ul class="row products columns-3">
