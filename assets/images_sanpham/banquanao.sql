@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 02, 2024 lúc 12:37 PM
--- Phiên bản máy phục vụ: 10.4.28-MariaDB
--- Phiên bản PHP: 8.0.28
+-- Thời gian đã tạo: Th1 05, 2024 lúc 12:02 PM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Phiên bản PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -62,7 +62,8 @@ CREATE TABLE `don_hang` (
 --
 
 INSERT INTO `don_hang` (`id`, `id_kh`, `ten_nguoi_nhan`, `email_nguoi_nhan`, `sdt_nguoi_nhan`, `dc_nguoi_nhan`, `ghi_chu`, `pttt`, `ngay_dat`, `tong_tien`, `tong_tien_da_tra`, `id_tt_don_hang`) VALUES
-(23, 3, 'Tôi k lấy', 'toiklay@gmail.com', '0333555999', 'America', 'Lấy 0 trả tiền', '2', '2024-01-02', 1550000, 1550000, 1);
+(24, 9, 'Toi la Doan', 'toikbiet@gmail.com', '0369852147', 'America', 'giao nhanh, kh tra tien', '2', '2024-01-05', 2250000, 2250000, 1),
+(25, 10, 'deo co', 'khonglaydau@gmail.com', '0123698547', 'Texas - America', 'khoccc', '2', '2024-01-05', 2900000, 2900000, 1);
 
 -- --------------------------------------------------------
 
@@ -75,16 +76,16 @@ CREATE TABLE `don_hang_ct` (
   `id_don_hang` int(11) NOT NULL,
   `id_sp_kc` varchar(11) NOT NULL,
   `so_luong` int(11) NOT NULL,
-  `gia` int(11) NOT NULL,
-  `qr` varchar(255) NOT NULL
+  `gia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `don_hang_ct`
 --
 
-INSERT INTO `don_hang_ct` (`id`, `id_don_hang`, `id_sp_kc`, `so_luong`, `gia`, `qr`) VALUES
-(10, 23, '89,37', 2, 1550000, 'assets/qr/1704192717.png');
+INSERT INTO `don_hang_ct` (`id`, `id_don_hang`, `id_sp_kc`, `so_luong`, `gia`) VALUES
+(11, 24, '117,101,1', 3, 2250000),
+(12, 25, '105,29,5,89', 4, 2900000);
 
 -- --------------------------------------------------------
 
@@ -259,7 +260,35 @@ INSERT INTO `sanpham_kichco` (`id`, `id_sp`, `id_kc`, `so_luong`, `gia`, `trang_
 (97, 30, 1, 60, 650000, 1),
 (98, 30, 2, 80, 650000, 1),
 (99, 30, 3, 30, 650000, 1),
-(100, 30, 4, 50, 650000, 1);
+(100, 30, 4, 50, 650000, 1),
+(101, 31, 1, 20, 800000, 1),
+(102, 31, 2, 60, 800000, 1),
+(103, 31, 3, 70, 800000, 1),
+(104, 31, 4, 80, 800000, 1),
+(105, 32, 1, 60, 750000, 1),
+(106, 32, 2, 90, 750000, 1),
+(107, 32, 3, 30, 750000, 1),
+(108, 32, 4, 40, 750000, 1),
+(109, 33, 1, 40, 500000, 1),
+(110, 33, 2, 60, 500000, 1),
+(111, 33, 3, 70, 500000, 1),
+(112, 33, 4, 20, 500000, 1),
+(113, 34, 1, 50, 600000, 1),
+(114, 35, 1, 50, 300000, 1),
+(115, 36, 1, 40, 350000, 1),
+(116, 37, 1, 0, 300000, 1),
+(117, 38, 1, 60, 700000, 1),
+(118, 38, 2, 20, 700000, 1),
+(119, 38, 3, 30, 700000, 1),
+(120, 38, 4, 70, 700000, 1),
+(121, 39, 1, 20, 1500000, 1),
+(122, 39, 2, 10, 1500000, 1),
+(123, 39, 3, 20, 1500000, 1),
+(124, 39, 4, 10, 1500000, 1),
+(125, 40, 1, 20, 1400000, 1),
+(126, 40, 2, 10, 1400000, 1),
+(127, 40, 3, 14, 1400000, 1),
+(128, 40, 4, 20, 1400000, 1);
 
 -- --------------------------------------------------------
 
@@ -306,7 +335,17 @@ INSERT INTO `san_pham` (`id`, `anh`, `ten`, `mo_ta`, `id_the_loai`, `id_thuong_h
 (27, '564172Y562U-1055-01-416x555.jpg', 'Saint Laurent Gold Floral Print Shirt', 'Thương hiệu Yves Saint Laurent hay còn gọi là YSL được thành lập bởi nhà thiết kế Yves Saint Laurent và Pierre Bergé. Ngay từ khi ra mắt, YSL đã khiến mọi người sửng sốt khi cho phụ nữ mặc vest và áo choàng dài. Ngoài ra, thương hiệu này còn táo bạo khi sử dụng các chất liệu trong suốt trong thời gian này. Chính nhờ sự táo bạo và phá cách, YSL được nhiều thành viên quý tộc lẫn giới thượng lưu yêu thích. Năm 1966, Yves Saint Laurent giới thiệu bộ sưu tập Le Smoking huyền thoại. Ông được ghi nhận với một loạt các cải tiến khác bao gồm reefer jacket (1962), sheer blouse(1966), và jumpsuit (1968), thời trang công sở cũng như sự kết hợp giữa ready-to-wear và haute coulture. Yves Saint Laurent thiết lập tiêu chuẩn mới cho thời trang thế giới khi điều chỉnh các bộ tuxedo nam cho nữ, cũng từ đây, phong cách menswear bùng nổ và làm điên đảo giới mộ điệu thời trang. Năm 1978, Yves Saint Laurent lần đầu tiên cho ra đời một dòng mỹ phẩm. Trong những năm 1980-1990, thương hiệu tiếp tục mở rộng sản xuất các loại nước hoa c', 1, 2, 1),
 (28, '583282Y227W-1000-01-416x555.jpg', 'Saint Laurent Glittery Collar Shirt', 'Thương hiệu Yves Saint Laurent hay còn gọi là YSL được thành lập bởi nhà thiết kế Yves Saint Laurent và Pierre Bergé. Ngay từ khi ra mắt, YSL đã khiến mọi người sửng sốt khi cho phụ nữ mặc vest và áo choàng dài. Ngoài ra, thương hiệu này còn táo bạo khi sử dụng các chất liệu trong suốt trong thời gian này. Chính nhờ sự táo bạo và phá cách, YSL được nhiều thành viên quý tộc lẫn giới thượng lưu yêu thích. Năm 1966, Yves Saint Laurent giới thiệu bộ sưu tập Le Smoking huyền thoại. Ông được ghi nhận với một loạt các cải tiến khác bao gồm reefer jacket (1962), sheer blouse(1966), và jumpsuit (1968), thời trang công sở cũng như sự kết hợp giữa ready-to-wear và haute coulture. Yves Saint Laurent thiết lập tiêu chuẩn mới cho thời trang thế giới khi điều chỉnh các bộ tuxedo nam cho nữ, cũng từ đây, phong cách menswear bùng nổ và làm điên đảo giới mộ điệu thời trang. Năm 1978, Yves Saint Laurent lần đầu tiên cho ra đời một dòng mỹ phẩm. Trong những năm 1980-1990, thương hiệu tiếp tục mở rộng sản xuất các loại nước hoa c', 1, 2, 1),
 (29, '520149Y1A78-1095-01-416x555.jpg', 'Saint Laurent Speckled Leopard Shirt', 'Thương hiệu Yves Saint Laurent hay còn gọi là YSL được thành lập bởi nhà thiết kế Yves Saint Laurent và Pierre Bergé. Ngay từ khi ra mắt, YSL đã khiến mọi người sửng sốt khi cho phụ nữ mặc vest và áo choàng dài. Ngoài ra, thương hiệu này còn táo bạo khi sử dụng các chất liệu trong suốt trong thời gian này. Chính nhờ sự táo bạo và phá cách, YSL được nhiều thành viên quý tộc lẫn giới thượng lưu yêu thích. Năm 1966, Yves Saint Laurent giới thiệu bộ sưu tập Le Smoking huyền thoại. Ông được ghi nhận với một loạt các cải tiến khác bao gồm reefer jacket (1962), sheer blouse(1966), và jumpsuit (1968), thời trang công sở cũng như sự kết hợp giữa ready-to-wear và haute coulture. Yves Saint Laurent thiết lập tiêu chuẩn mới cho thời trang thế giới khi điều chỉnh các bộ tuxedo nam cho nữ, cũng từ đây, phong cách menswear bùng nổ và làm điên đảo giới mộ điệu thời trang. Năm 1978, Yves Saint Laurent lần đầu tiên cho ra đời một dòng mỹ phẩm. Trong những năm 1980-1990, thương hiệu tiếp tục mở rộng sản xuất các loại nước hoa c', 1, 2, 1),
-(30, '587035YF8691080-01-416x555.jpg', 'Saint Laurent Black Cotton Jeans', 'Thương hiệu Yves Saint Laurent hay còn gọi là YSL được thành lập bởi nhà thiết kế Yves Saint Laurent và Pierre Bergé. Ngay từ khi ra mắt, YSL đã khiến mọi người sửng sốt khi cho phụ nữ mặc vest và áo choàng dài. Ngoài ra, thương hiệu này còn táo bạo khi sử dụng các chất liệu trong suốt trong thời gian này. Chính nhờ sự táo bạo và phá cách, YSL được nhiều thành viên quý tộc lẫn giới thượng lưu yêu thích. Năm 1966, Yves Saint Laurent giới thiệu bộ sưu tập Le Smoking huyền thoại. Ông được ghi nhận với một loạt các cải tiến khác bao gồm reefer jacket (1962), sheer blouse(1966), và jumpsuit (1968), thời trang công sở cũng như sự kết hợp giữa ready-to-wear và haute coulture. Yves Saint Laurent thiết lập tiêu chuẩn mới cho thời trang thế giới khi điều chỉnh các bộ tuxedo nam cho nữ, cũng từ đây, phong cách menswear bùng nổ và làm điên đảo giới mộ điệu thời trang. Năm 1978, Yves Saint Laurent lần đầu tiên cho ra đời một dòng mỹ phẩm. Trong những năm 1980-1990, thương hiệu tiếp tục mở rộng sản xuất các loại nước hoa c', 2, 2, 1);
+(30, '587035YF8691080-01-416x555.jpg', 'Saint Laurent Black Cotton Jeans', 'Thương hiệu Yves Saint Laurent hay còn gọi là YSL được thành lập bởi nhà thiết kế Yves Saint Laurent và Pierre Bergé. Ngay từ khi ra mắt, YSL đã khiến mọi người sửng sốt khi cho phụ nữ mặc vest và áo choàng dài. Ngoài ra, thương hiệu này còn táo bạo khi sử dụng các chất liệu trong suốt trong thời gian này. Chính nhờ sự táo bạo và phá cách, YSL được nhiều thành viên quý tộc lẫn giới thượng lưu yêu thích. Năm 1966, Yves Saint Laurent giới thiệu bộ sưu tập Le Smoking huyền thoại. Ông được ghi nhận với một loạt các cải tiến khác bao gồm reefer jacket (1962), sheer blouse(1966), và jumpsuit (1968), thời trang công sở cũng như sự kết hợp giữa ready-to-wear và haute coulture. Yves Saint Laurent thiết lập tiêu chuẩn mới cho thời trang thế giới khi điều chỉnh các bộ tuxedo nam cho nữ, cũng từ đây, phong cách menswear bùng nổ và làm điên đảo giới mộ điệu thời trang. Năm 1978, Yves Saint Laurent lần đầu tiên cho ra đời một dòng mỹ phẩm. Trong những năm 1980-1990, thương hiệu tiếp tục mở rộng sản xuất các loại nước hoa c', 2, 2, 1),
+(31, 'MWL374C05371-Thom-Browne-Shirt-01-416x555.jpg', 'Thom Browne Straight Fit Shirt W/Slik 4 Bar', 'Thom Browne (sinh năm 1965) là nhà thiết kế thời trang người Mỹ . Ông là người sáng lập và trưởng bộ phận thiết kế cho Thom Browne, một thương hiệu thời trang nam và nữ có trụ sở tại Thành phố New York.Browne ra mắt bộ sưu tập quần áo nữ của mình vào năm 2014.Thom Browne đã lớn lên với một niềm ám ảnh đau đáu dành cho những bộ suit – thứ trang phục quen thuộc nhưng khắt khe đối với người mặc. Tuy nhiên ông lại theo học chuyên ngành kinh tế tại Đại học Notre Dame, tham gia vào đội tuyển bơi lội của trường như bao sinh viên cùng trang lứa. Sau khi tốt nghiệp với tấm bằng cử nhân kinh tế, Thom Browne lại chuyển đến LA để theo đuổi sự nghiệp diễn xuất. Dù sở hữu khuôn mặt và vóc dáng đẹp nhưng Thom Browne cũng chỉ kiếm được những hợp đồng quảng cáo thương mại bèo bọt. Dù sự nghiệp diễn xuất không phát triển nhưng LA lại là vùng đất cho Thom Browne thoả sức sáng tạo với gout thời trang cổ điển của mình. Thay cho những thiết kế phá cách của các thương hiệu thời trang mang đậm hơi thở nước Mỹ hiện đại, Thom Browne l', 1, 3, 1),
+(32, 'MWS252A06272-035-Thom-Browne-Shirt-01-416x555.jpg', 'Thom Browne Rwb Striped Short-Sleeve Shirt', 'Thom Browne (sinh năm 1965) là nhà thiết kế thời trang người Mỹ . Ông là người sáng lập và trưởng bộ phận thiết kế cho Thom Browne, một thương hiệu thời trang nam và nữ có trụ sở tại Thành phố New York.Browne ra mắt bộ sưu tập quần áo nữ của mình vào năm 2014.Thom Browne đã lớn lên với một niềm ám ảnh đau đáu dành cho những bộ suit – thứ trang phục quen thuộc nhưng khắt khe đối với người mặc. Tuy nhiên ông lại theo học chuyên ngành kinh tế tại Đại học Notre Dame, tham gia vào đội tuyển bơi lội của trường như bao sinh viên cùng trang lứa. Sau khi tốt nghiệp với tấm bằng cử nhân kinh tế, Thom Browne lại chuyển đến LA để theo đuổi sự nghiệp diễn xuất. Dù sở hữu khuôn mặt và vóc dáng đẹp nhưng Thom Browne cũng chỉ kiếm được những hợp đồng quảng cáo thương mại bèo bọt. Dù sự nghiệp diễn xuất không phát triển nhưng LA lại là vùng đất cho Thom Browne thoả sức sáng tạo với gout thời trang cổ điển của mình. Thay cho những thiết kế phá cách của các thương hiệu thời trang mang đậm hơi thở nước Mỹ hiện đại, Thom Browne l', 1, 3, 1),
+(33, 'MWS252A06272-415-Thom-Browne-Shirt-01-416x555.jpg', 'Thom Browne Rwb Striped Short-Sleeve Shirt', 'Thom Browne (sinh năm 1965) là nhà thiết kế thời trang người Mỹ . Ông là người sáng lập và trưởng bộ phận thiết kế cho Thom Browne, một thương hiệu thời trang nam và nữ có trụ sở tại Thành phố New York.Browne ra mắt bộ sưu tập quần áo nữ của mình vào năm 2014.Thom Browne đã lớn lên với một niềm ám ảnh đau đáu dành cho những bộ suit – thứ trang phục quen thuộc nhưng khắt khe đối với người mặc. Tuy nhiên ông lại theo học chuyên ngành kinh tế tại Đại học Notre Dame, tham gia vào đội tuyển bơi lội của trường như bao sinh viên cùng trang lứa. Sau khi tốt nghiệp với tấm bằng cử nhân kinh tế, Thom Browne lại chuyển đến LA để theo đuổi sự nghiệp diễn xuất. Dù sở hữu khuôn mặt và vóc dáng đẹp nhưng Thom Browne cũng chỉ kiếm được những hợp đồng quảng cáo thương mại bèo bọt. Dù sự nghiệp diễn xuất không phát triển nhưng LA lại là vùng đất cho Thom Browne thoả sức sáng tạo với gout thời trang cổ điển của mình. Thay cho những thiết kế phá cách của các thương hiệu thời trang mang đậm hơi thở nước Mỹ hiện đại, Thom Browne l', 1, 3, 1),
+(34, 'louis-vuitton-confidential-bracelet-M6640E-416x555.jpg', 'Louis Vuitton LV Confidential Bracelet', 'Louis Vuitton là biểu tượng của giới thời trang thượng lưu tại Pháp, nổi tiếng khắp thể giới với logo lồng ghép 2 kí tự LV và các motif mang tính di sản.', 3, 4, 1),
+(35, 'louis-vuitton-keep-it-twice-monogram-bracelet-M6640E-416x555.jpg', 'Louis Vuitton Keep It Twice Monogram Bracelet', 'Louis Vuitton là biểu tượng của giới thời trang thượng lưu tại Pháp, nổi tiếng khắp thể giới với logo lồng ghép 2 kí tự LV và các motif mang tính di sản.', 3, 4, 1),
+(36, 'louis-vuitton-split-leather-bracelet-M6491D-416x554.jpg', 'Louis Vuitton Split Leather Bracelet', 'Louis Vuitton là biểu tượng của giới thời trang thượng lưu tại Pháp, nổi tiếng khắp thể giới với logo lồng ghép 2 kí tự LV và các motif mang tính di sản.', 3, 4, 1),
+(37, 'louis-vuitton-tribute-bracelet-M6442E-416x555.jpg', 'Louis Vuitton Vivienne Bracelet', 'Louis Vuitton là biểu tượng của giới thời trang thượng lưu tại Pháp, nổi tiếng khắp thể giới với logo lồng ghép 2 kí tự LV và các motif mang tính di sản.', 3, 4, 1),
+(38, 'Dep-hermes-Izmir-H041141ZH01415-01-416x555.jpg', 'Hermes Sandales Izmir', 'Nhắc đến những nhà mốt quyền lực của giới mộ điệu, Hermes luôn là cái tên đứng đầu bảng xếp hạng. Vào mỗi mùa hè, Hermes sẽ khiến các tín đồ thời trang chao đảo với mẫu sandal Hermes Izmir dành cho nam giới.', 4, 5, 1),
+(39, '6301070NPKK-1000-saintlaurent-pump-01-416x555.jpg', 'Saint Laurent Opyum Slingback Pumps', 'Thương hiệu Yves Saint Laurent hay còn gọi là YSL được thành lập bởi nhà thiết kế Yves Saint Laurent và Pierre Bergé. Ngay từ khi ra mắt, YSL đã khiến mọi người sửng sốt khi cho phụ nữ mặc vest và áo choàng dài. Ngoài ra, thương hiệu này còn táo bạo khi sử dụng các chất liệu trong suốt trong thời gian này. Chính nhờ sự táo bạo và phá cách, YSL được nhiều thành viên quý tộc lẫn giới thượng lưu yêu thích. Năm 1966, Yves Saint Laurent giới thiệu bộ sưu tập Le Smoking huyền thoại. Ông được ghi nhận với một loạt các cải tiến khác bao gồm reefer jacket (1962), sheer blouse(1966), và jumpsuit (1968), thời trang công sở cũng như sự kết hợp giữa ready-to-wear và haute coulture. Yves Saint Laurent thiết lập tiêu chuẩn mới cho thời trang thế giới khi điều chỉnh các bộ tuxedo nam cho nữ, cũng từ đây, phong cách menswear bùng nổ và làm điên đảo giới mộ điệu thời trang. Năm 1978, Yves Saint Laurent lần đầu tiên cho ra đời một dòng mỹ phẩm. Trong những năm 1980-1990, thương hiệu tiếp tục mở rộng sản xuất các loại nước hoa c', 5, 2, 1),
+(40, '6301080NPKK1000-saintlaurent-pump-01-416x555.jpg', 'Saint Laurent Opyum Slingback Pumps', 'Thương hiệu Yves Saint Laurent hay còn gọi là YSL được thành lập bởi nhà thiết kế Yves Saint Laurent và Pierre Bergé. Ngay từ khi ra mắt, YSL đã khiến mọi người sửng sốt khi cho phụ nữ mặc vest và áo choàng dài. Ngoài ra, thương hiệu này còn táo bạo khi sử dụng các chất liệu trong suốt trong thời gian này. Chính nhờ sự táo bạo và phá cách, YSL được nhiều thành viên quý tộc lẫn giới thượng lưu yêu thích. Năm 1966, Yves Saint Laurent giới thiệu bộ sưu tập Le Smoking huyền thoại. Ông được ghi nhận với một loạt các cải tiến khác bao gồm reefer jacket (1962), sheer blouse(1966), và jumpsuit (1968), thời trang công sở cũng như sự kết hợp giữa ready-to-wear và haute coulture. Yves Saint Laurent thiết lập tiêu chuẩn mới cho thời trang thế giới khi điều chỉnh các bộ tuxedo nam cho nữ, cũng từ đây, phong cách menswear bùng nổ và làm điên đảo giới mộ điệu thời trang. Năm 1978, Yves Saint Laurent lần đầu tiên cho ra đời một dòng mỹ phẩm. Trong những năm 1980-1990, thương hiệu tiếp tục mở rộng sản xuất các loại nước hoa c', 5, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -330,10 +369,10 @@ CREATE TABLE `tai_khoan` (
 --
 
 INSERT INTO `tai_khoan` (`id`, `anh`, `ten`, `email`, `mat_khau`, `dia_chi`, `role`, `trang_thai`) VALUES
-(1, NULL, NULL, 'admin@gmail.com', '1', NULL, 1, 1),
-(2, '212c07c4ee1847461e09.jpg', 'Bố Đoàn Đại CA', 'dddoan1909@gmail.com', '1', 'America', 0, 1),
-(3, NULL, NULL, 'accdemo1909@gmail.com', '1', NULL, 0, 1),
-(7, NULL, NULL, 'doannvph33201@fpt.edu.vn', '1', NULL, 0, 1);
+(1, 'anhcuatao.jpg', 'Nguyễn Văn Đoàn', 'admin@gmail.com', '1', 'Texas - America', 1, 1),
+(8, '212c07c4ee1847461e09.jpg', 'Bố Đoàn Đại CA', 'accdemo1909@gmail.com', '1', 'California - America', 5, 1),
+(9, NULL, 'kh biet', 'deocodau@gmail.com', '1', 'Hà Nội', 0, 1),
+(10, NULL, NULL, 'cocaicctao@gmail.com', '2', NULL, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -353,7 +392,10 @@ CREATE TABLE `the_loai` (
 
 INSERT INTO `the_loai` (`id`, `ten_loai`, `trang_thai`) VALUES
 (1, 'Áo', 1),
-(2, 'Quần', 1);
+(2, 'Quần', 1),
+(3, 'Vòng tay', 1),
+(4, 'Dép', 1),
+(5, 'Nữ', 1);
 
 -- --------------------------------------------------------
 
@@ -374,7 +416,9 @@ CREATE TABLE `thuong_hieu` (
 INSERT INTO `thuong_hieu` (`id`, `ten_thuong_hieu`, `trang_thai`) VALUES
 (1, 'Amiri', 1),
 (2, 'Saint Laurent', 1),
-(3, 'Louis Vuitton', 1);
+(3, 'Thom Browne', 1),
+(4, 'Louis Vuitton', 1),
+(5, 'Hermes', 1);
 
 -- --------------------------------------------------------
 
@@ -499,19 +543,19 @@ ALTER TABLE `binh_luan`
 -- AUTO_INCREMENT cho bảng `don_hang`
 --
 ALTER TABLE `don_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT cho bảng `don_hang_ct`
 --
 ALTER TABLE `don_hang_ct`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `gio_hang`
 --
 ALTER TABLE `gio_hang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT cho bảng `kich_co`
@@ -529,31 +573,31 @@ ALTER TABLE `phuong_thuc_thanh_toan`
 -- AUTO_INCREMENT cho bảng `sanpham_kichco`
 --
 ALTER TABLE `sanpham_kichco`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT cho bảng `san_pham`
 --
 ALTER TABLE `san_pham`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT cho bảng `tai_khoan`
 --
 ALTER TABLE `tai_khoan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `the_loai`
 --
 ALTER TABLE `the_loai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `thuong_hieu`
 --
 ALTER TABLE `thuong_hieu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `trang_thai_don_hang`
