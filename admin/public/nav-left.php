@@ -2,9 +2,12 @@
 <aside class="app-sidebar">
     <div class="app-sidebar__user">
         <?php if (isset($thong_tin_quan_tri["anh"])) { ?>
-            <img class="app-sidebar__user-avatar" src="../assets/images_sanpham/<?= $thong_tin_quan_tri["anh"] ?>" width="60px" alt="User Image">
+        <img class="app-sidebar__user-avatar" src="../assets/images_sanpham/<?= $thong_tin_quan_tri["anh"] ?>"
+            width="60px" alt="User Image">
         <?php } else { ?>
-            <img style="width: 84px; height: 84px; object-fit: cover; border-radius: 50%;" src="https://inkythuatso.com/uploads/thumbnails/800/2023/03/8-anh-dai-dien-trang-inkythuatso-03-15-26-54.jpg" alt="">
+        <img style="width: 84px; height: 84px; object-fit: cover; border-radius: 50%;"
+            src="https://inkythuatso.com/uploads/thumbnails/800/2023/03/8-anh-dai-dien-trang-inkythuatso-03-15-26-54.jpg"
+            alt="">
         <?php } ?>
         <div>
             <p class="app-sidebar__user-name">
@@ -30,7 +33,7 @@
         </li>
 
         <li>
-            <a class="app-menu__item " href="#">
+            <a class="app-menu__item " href="index.php?url=ds_nhan_vien">
                 <i class="app-menu__icon fa fa-user-tie"></i>
                 <span class="app-menu__label">Quản lý nhân viên</span>
             </a>

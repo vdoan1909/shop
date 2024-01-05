@@ -10,7 +10,6 @@
         <div class="col-md-12">
             <div class="tile">
                 <div class="tile-body">
-
                     <div id="sampleTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
                         <form action="index.php?url=ds_khach_hang" class="row" method="post">
                             <div class="col-sm-12 col-md-6">
@@ -42,6 +41,7 @@
                                         <?php foreach ($ds_khach_hang as $khach_hang) :
                                             extract($khach_hang);
                                             $sua_khach_hang = "index.php?url=sua_khach_hang&id_kh=" . $id;
+                                            $xoa_khach_hang = "index.php?url=xoa_khach_hang&id_kh=" . $id;
                                         ?>
                                             <tr>
                                                 <td><?= $id ?></td>
@@ -71,6 +71,11 @@
                                                     <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal" data-target="#ModalUP">
                                                         <a style="color: #f59d39;" href="<?= $sua_khach_hang ?>">
                                                             <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    </button>
+                                                    <button class="btn btn-primary btn-sm trash" type="button" title="Xóa">
+                                                        <a style="color: red;" href="<?= $xoa_khach_hang ?>" onclick="return confirm('Xoá là mất luôn ?')">
+                                                            <i class=" fas fa-trash-alt"></i>
                                                         </a>
                                                     </button>
                                                 </td>

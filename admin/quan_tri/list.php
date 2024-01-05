@@ -10,15 +10,6 @@
         <div class="col-md-12">
             <div class="tile">
                 <div class="tile-body">
-                    <div class="row element-button">
-                        <div class="col-sm-2">
-                            <a class="btn btn-add btn-sm" href="index.php?url=them_quan_tri" title="Thêm">
-                                <i class="fas fa-plus"></i>
-                                Thêm quản trị
-                            </a>
-                        </div>
-                    </div>
-
                     <div id="sampleTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
                         <form action="index.php?url=ds_quan_tri" class="row" method="post">
                             <div class="col-sm-12 col-md-6">
@@ -45,13 +36,11 @@
                                             <th>Địa chỉ</th>
                                             <th>Cấp bậc</th>
                                             <th>Trạng thái</th>
-                                            <th>Chức năng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php foreach ($ds_quan_tri as $quan_tri) :
                                             extract($quan_tri);
-                                            $sua_quan_tri = "index.php?url=sua_quan_tri&id_qt=" . $id;
                                         ?>
                                         <tr>
                                             <td><?= $id ?></td>
@@ -73,14 +62,6 @@
                                                 <?php } else { ?>
                                                 Không hoạt động
                                                 <?php } ?>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"
-                                                    id="show-emp" data-toggle="modal" data-target="#ModalUP">
-                                                    <a style="color: #f59d39;" href="<?= $sua_quan_tri ?>">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                </button>
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>

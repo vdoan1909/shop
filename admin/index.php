@@ -547,12 +547,69 @@ switch ($url) {
         break;
 
         // Nhân viên
+    case "ds_nhan_vien":
+        $title = "Danh sách nhân viên";
+        $ten_nhan_vien = isset($_POST["ten_nhan_vien"]) ? $_POST["ten_nhan_vien"] : "";
+        $ds_nhan_vien = ds_nhan_vien($ten_nhan_vien);
+        $VIEW = "nhan_vien/list.php";
+        break;
+
+    case "sua_nhan_vien":
+        $title = "Sửa nhân viên";
+        $thong_tin_tai_khoan = thong_tin_tai_khoan($_GET["id_nv"]);
+        $VIEW = "nhan_vien/update.php";
+        break;
+
+    case "update_nhan_vien":
+        $title = "Sửa nhân viên";
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            extract($_POST);
+
+            update_nhan_vien($id, $cap_bac, $trang_thai);
+            $success = "Sửa thành công !";
+            $thong_tin_tai_khoan = thong_tin_tai_khoan($id);
+        }
+        $VIEW = "nhan_vien/update.php";
+        break;
+
+    case "xoa_nhan_vien":
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            xoa_nhan_vien($_GET["id_nv"]);
+        }
+        header("location: index.php?url=ds_nhan_vien");
+        break;
 
         // Khách hàng
     case "ds_khach_hang":
         $title = "Danh sách khách hàng";
-        $ds_khach_hang = ds_khach_hang();
+        $ten_khach_hang = isset($_POST["ten_khach_hang"]) ? $_POST["ten_khach_hang"] : "";
+        $ds_khach_hang = ds_khach_hang($ten_khach_hang);
         $VIEW = "khach_hang/list.php";
+        break;
+
+    case "sua_khach_hang":
+        $title = "Sửa khách hàng";
+        $thong_tin_tai_khoan = thong_tin_tai_khoan($_GET["id_kh"]);
+        $VIEW = "khach_hang/update.php";
+        break;
+
+    case "update_khach_hang":
+        $title = "Sửa khách hàng";
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            extract($_POST);
+
+            update_khach_hang($id, $cap_bac, $trang_thai);
+            $success = "Sửa thành công !";
+            $thong_tin_tai_khoan = thong_tin_tai_khoan($id);
+        }
+        $VIEW = "khach_hang/update.php";
+        break;
+
+    case "xoa_khach_hang":
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            xoa_khach_hang($_GET["id_kh"]);
+        }
+        header("location: index.php?url=ds_khach_hang");
         break;
         // ========== TÀI KHOẢN ========== //
 

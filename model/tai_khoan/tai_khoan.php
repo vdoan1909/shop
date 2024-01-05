@@ -64,9 +64,48 @@ function ds_quan_tri()
     return $quan_tri;
 }
 
-function ds_khach_hang()
+function ds_khach_hang($ten_khach_hang)
 {
-    $sql = "select * from tai_khoan where role = 0";
+    $sql = "select * from tai_khoan ";
+    $sql .= " where role = 0";
+    if (!empty($ten_khach_hang)) {
+        $sql .= " and ten like '%$ten_khach_hang%'";
+    }
     $khach_hang = pdo_query($sql);
     return $khach_hang;
+}
+
+function update_khach_hang($id, $role, $trang_thai)
+{
+    $sql = "update tai_khoan set role = ?, trang_thai = ? where id = ?";
+    pdo_execute($sql, $role, $trang_thai, $id);
+}
+
+function xoa_khach_hang($id)
+{
+    $sql = "update tai_khoan set trang_thai = 0 where id = ?";
+    pdo_execute($sql, $id);
+}
+
+function ds_nhan_vien($ten_nhan_vien)
+{
+    $sql = "select * from tai_khoan ";
+    $sql .= " where role not in (0, 1)";
+    if (!empty($ten_nhan_vien)) {
+        $sql .= " and ten like '%$ten_nhan_vien%'";
+    }
+    $nhan_vien = pdo_query($sql);
+    return $nhan_vien;
+}
+
+function update_nhan_vien($id, $role, $trang_thai)
+{
+    $sql = "update tai_khoan set role = ?, trang_thai = ? where id = ?";
+    pdo_execute($sql, $role, $trang_thai, $id);
+}
+
+function xoa_nhan_vien($id)
+{
+    $sql = "update tai_khoan set trang_thai = 0 where id = ?";
+    pdo_execute($sql, $id);
 }
