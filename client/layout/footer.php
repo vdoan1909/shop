@@ -56,38 +56,20 @@
 <div class="footer-device-mobile">
     <div class="wapper">
         <div class="footer-device-mobile-item device-home">
-            <a href="index.html">
+            <a href="index.php">
                 <span class="icon">
                     <i class="fa fa-home" aria-hidden="true"></i>
                 </span>
-                Home
-            </a>
-        </div>
-        <div class="footer-device-mobile-item device-home device-wishlist">
-            <a href="wishlist.html">
-                <span class="icon">
-                    <i class="fa fa-heart" aria-hidden="true"></i>
-                </span>
-                Wishlist
+                Trang chủ
             </a>
         </div>
         <div class="footer-device-mobile-item device-home device-cart">
-            <a href="cart.html">
+            <a href="index.php?url=gio_hang">
                 <span class="icon">
                     <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                    <span class="count-icon">
-                        0
-                    </span>
+                    <span class="count-icon"><?= $so_luong_san_pham_gio_hang["so_luong"] ?? 0 ?></span>
                 </span>
-                <span class="text">Cart</span>
-            </a>
-        </div>
-        <div class="footer-device-mobile-item device-home device-user">
-            <a href="my-account.html">
-                <span class="icon">
-                    <i class="fa fa-user" aria-hidden="true"></i>
-                </span>
-                Account
+                <span class="text">Giỏ hàng</span>
             </a>
         </div>
     </div>
@@ -112,21 +94,21 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <script>
-$(document).ready(function() {
-    $(".kich_co strong").click(function() {
-        // Remove the class from all other elements
-        $(".kich_co strong").removeClass("kich_co-selected");
+    $(document).ready(function() {
+        $(".kich_co strong").click(function() {
+            // Remove the class from all other elements
+            $(".kich_co strong").removeClass("kich_co-selected");
 
-        // Add the class to the clicked <strong> element
-        $(this).addClass("kich_co-selected");
+            // Add the class to the clicked <strong> element
+            $(this).addClass("kich_co-selected");
 
-        // Get the value from the clicked <strong> element
-        var kichCoId = $(this).next('input[name="id"]').val();
+            // Get the value from the clicked <strong> element
+            var kichCoId = $(this).next('input[name="id"]').val();
 
-        // Update the value of the hidden input with the clicked kich_co ID
-        $("input[name='id_kc']").val(kichCoId);
+            // Update the value of the hidden input with the clicked kich_co ID
+            $("input[name='id_kc']").val(kichCoId);
+        });
     });
-});
 </script>
 
 </body>
