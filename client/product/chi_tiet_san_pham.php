@@ -45,8 +45,11 @@ $fm_gia = number_format($ct_san_pham["gia"], 0, ',', '.');
                                         </span>
                                         <input type="hidden" name="id_kc" value="">
                                         <input name="id_sp" value="<?= $ct_san_pham["id"] ?>" type="hidden">
-                                        <input type="hidden" name="id_sp_kc" value="<?= $_GET["id_sp_kc"] ?>">
+                                        <input type="hidden" name="id_sp_kc" value="<?= $_GET["id_sp_kc"] ?? $_POST["id_sp_kc"] ?>">
+                                        <input type="hidden" name="id_tl" value="<?= $_GET["id_tl"] ?? $_POST["id_tl"] ?>">
+                                        <input type="hidden" name="id_th" value="<?= $_GET["id_th"] ?? $_POST["id_th"] ?>">
                                         <?php endforeach; ?>
+                                        <span style="color: red;"><?= $errors["id_kc"] ?? "" ?></span>
                                     </div>
                                     <div class="single_variation_wrap">
                                         <div class="akasha-variation single_variation"></div>

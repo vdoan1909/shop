@@ -52,8 +52,7 @@
                                     <input type="hidden" name="id_sp_kc[]" value="<?= $sp_gh['id_sp_kc'] ?>">
                                     <tr class="akasha-cart-form__cart-item cart_item">
                                         <td class="product-remove">
-                                            <a href="#" class="remove" aria-label="Remove this item"
-                                                data-product_id="27" data-product_sku="885B712">×</a>
+                                            <a onclick="return confirm('Bạn có muốn xoá sản phẩm khỏi giỏ hàng không')" href="index.php?url=xoa_gio_hang&id_gh=<?= $sp_gh['id'] ?>" class="remove">×</a>
                                         </td>
                                         <td class="product-thumbnail">
                                             <a href="#"><img src="assets/upload/<?= $sp_gh["anh"] ?>"

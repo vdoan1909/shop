@@ -29,7 +29,7 @@
                                     <span style="color: red;"><?= $errors["email_dang_nhap"] ?? "" ?></span>
                                     <p class="akasha-form-row akasha-form-row--wide form-row form-row-wide">
                                         <label>Mật khẩu&nbsp;<span>*</span></label>
-                                        <input type="text" class="akasha-Input akasha-Input--text input-text" name="mat_khau">
+                                        <input type="password" class="akasha-Input akasha-Input--text input-text" name="mat_khau">
                                     </p>
                                     <span style="color: red;"><?= $errors["mat_khau_dang_nhap"] ?? "" ?></span>
                                     <span style="color: red;"><?= $errors["dang_nhap"] ?? "" ?></span>
@@ -52,7 +52,7 @@
                                     <span style="color: red;"><?= $errors["email"] ?? "" ?></span>
                                     <p class="akasha-form-row akasha-form-row--wide form-row form-row-wide">
                                         <label>Mật khẩu&nbsp;<span>*</span></label>
-                                        <input type="text" class="akasha-Input akasha-Input--text input-text" name="mat_khau">
+                                        <input type="password" class="akasha-Input akasha-Input--text input-text" name="mat_khau">
                                     </p>
                                     <span style="color: red;"><?= $errors["mat_khau"] ?? "" ?></span>
                                     <span style="color: green;"><?= $success ?? "" ?></span>

@@ -2,7 +2,7 @@
 <aside class="app-sidebar">
     <div class="app-sidebar__user">
         <?php if (isset($thong_tin_quan_tri["anh"])) { ?>
-            <img class="app-sidebar__user-avatar" src="../assets/images_sanpham/<?= $thong_tin_quan_tri["anh"] ?>" width="60px" alt="User Image">
+            <img class="app-sidebar__user-avatar" src="../assets/upload/<?= $thong_tin_quan_tri["anh"] ?>" width="60px" alt="User Image">
         <?php } else { ?>
             <img style="width: 84px; height: 84px; object-fit: cover; border-radius: 50%;" src="https://inkythuatso.com/uploads/thumbnails/800/2023/03/8-anh-dai-dien-trang-inkythuatso-03-15-26-54.jpg" alt="">
         <?php } ?>

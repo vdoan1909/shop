@@ -45,12 +45,16 @@
                                         <tr>
                                             <td><?= $id ?></td>
                                             <td>
+                                                <?php if(isset($anh)) { ?>
                                                 <img style="width: 200px; height: 200px; object-fit: cover;"
                                                     src="../assets/upload/<?= $anh ?>" alt="">
+                                                    <?php } else{ ?>
+                                                        <img style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%;" src="https://inkythuatso.com/uploads/thumbnails/800/2023/03/8-anh-dai-dien-trang-inkythuatso-03-15-26-54.jpg" alt="">
+                                                    <?php } ?>
                                             </td>
-                                            <td><?= $ten ?></td>
+                                            <td><?= $ten ?? "Chưa cập nhật" ?></td>
                                             <td><?= $email ?></td>
-                                            <td><?= $dia_chi ?></td>
+                                            <td><?= $dia_chi ?? "Chưa cập nhật" ?></td>
                                             <td>
                                                 <?php if ($role == 1) {
                                                         echo "Quản trị";

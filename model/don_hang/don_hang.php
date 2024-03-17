@@ -12,7 +12,13 @@ function add_don_hang_chi_tiet($id_don_hang, $id_sp_kc, $so_luong, $gia)
     pdo_execute($sql, $id_don_hang, $id_sp_kc, $so_luong, $gia);
 }
 
-function xoa_gio_hang($id_kh)
+function xoa_gio_hang($id_gh)
+{
+    $sql = "delete from gio_hang where id = ?";
+    pdo_execute($sql, $id_gh);
+}
+
+function xoa_gio_hang_kh($id_kh)
 {
     $sql = "delete from gio_hang where id_kh = ?";
     pdo_execute($sql, $id_kh);

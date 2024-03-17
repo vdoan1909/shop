@@ -59,23 +59,41 @@ switch ($url) {
         $title = "Giỏ hàng";
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             extract($_POST);
-            $lay_id_san_pham_kich_co = lay_id_san_pham_kich_co($id_sp, $id_kc);
-            $check_san_pham_gio_hang = check_san_pham_gio_hang($_SESSION["tai_khoan"]["id"], $lay_id_san_pham_kich_co["id"]);
 
-            san_pham_kich_co_gio_hang($_SESSION["tai_khoan"]["id"], $lay_id_san_pham_kich_co["id"], $so_luong);
-
-            // Tạo session "gio_hang" nếu chưa tồn tại
-            if (!isset($_SESSION["gio_hang"])) {
-                $_SESSION["gio_hang"] = array();
+            if (empty($so_luong)) {
+                echo "<script>alert('Vui lòng chọn số lượng sản phẩm')</script>";
+                $ct_san_pham = ct_san_pham($id_sp);
+                $kich_co_san_pham = kich_co_san_pham($id_sp);
+                $san_pham_cung_loai = san_pham_cung_loai($id_tl, $id_sp);
+                $san_pham_ban_them = san_pham_ban_them($id_th);
+                $VIEW = "client/product/chi_tiet_san_pham.php";
             }
 
-            // Thêm sản phẩm vào session "gio_hang"
-            $san_pham = array(
-                "id_kh" => $_SESSION["tai_khoan"]["id"],
-                "id_sp_kc" => $lay_id_san_pham_kich_co["id"],
-                "so_luong" => $so_luong
-            );
-            header("location: index.php?url=gio_hang");
+            if (empty($id_kc)) {
+                echo "<script>alert('Vui lòng kích cỡ phù hợp với bản thân')</script>";
+                $ct_san_pham = ct_san_pham($id_sp);
+                $kich_co_san_pham = kich_co_san_pham($id_sp);
+                $san_pham_cung_loai = san_pham_cung_loai($id_tl, $id_sp);
+                $san_pham_ban_them = san_pham_ban_them($id_th);
+                $VIEW = "client/product/chi_tiet_san_pham.php";
+            } else {
+                $lay_id_san_pham_kich_co = lay_id_san_pham_kich_co($id_sp, $id_kc);
+                $check_san_pham_gio_hang = check_san_pham_gio_hang($_SESSION["tai_khoan"]["id"], $lay_id_san_pham_kich_co["id"]);
+            }
+
+            if (!empty($_SESSION["tai_khoan"]["id"]) && !empty($lay_id_san_pham_kich_co["id"]) && !empty($so_luong)) {
+                san_pham_kich_co_gio_hang($_SESSION["tai_khoan"]["id"], $lay_id_san_pham_kich_co["id"], $so_luong);
+                if (!isset($_SESSION["gio_hang"])) {
+                    $_SESSION["gio_hang"] = array();
+                }
+
+                $san_pham = array(
+                    "id_kh" => $_SESSION["tai_khoan"]["id"],
+                    "id_sp_kc" => $lay_id_san_pham_kich_co["id"],
+                    "so_luong" => $so_luong
+                );
+                header("location: index.php?url=gio_hang");
+            }
         }
         break;
 
@@ -87,6 +105,11 @@ switch ($url) {
         $ds_san_pham_ban_them = san_pham_ban_them_gio_hang();
         $VIEW = "client/product/gio_hang.php";
         break;
+
+    case "xoa_gio_hang":
+        $id_gh = isset($_GET["id_gh"]) ? $_GET["id_gh"] : "";
+        $xoa_gh = xoa_gio_hang($id_gh);
+        header("location: index.php?url=gio_hang");
         // ========== SẢN PHẨM ========== //
 
         // ========== THANH TOÁN ========== //
@@ -126,11 +149,11 @@ switch ($url) {
             if ($pttt == 1) {
                 $id_don_hang = add_don_hang($id_kh, $ten_nguoi_nhan, $email_nguoi_nhan, $sdt_nguoi_nhan, $dc_nguoi_nhan, $ghi_chu, $pttt, $amount, 0);
                 add_don_hang_chi_tiet($id_don_hang, $id_sp_kc_string, $so_luong_san_pham, $amount);
-                xoa_gio_hang($_SESSION["tai_khoan"]["id"]);
+                xoa_gio_hang_kh($_SESSION["tai_khoan"]["id"]);
             } else {
                 $id_don_hang = add_don_hang($id_kh, $ten_nguoi_nhan, $email_nguoi_nhan, $sdt_nguoi_nhan, $dc_nguoi_nhan, $ghi_chu, $pttt, $amount, $amount);
                 add_don_hang_chi_tiet($id_don_hang, $id_sp_kc_string, $so_luong_san_pham, $amount);
-                xoa_gio_hang($_SESSION["tai_khoan"]["id"]);
+                xoa_gio_hang_kh($_SESSION["tai_khoan"]["id"]);
             }
         }
         require_once "assets/PHPMailer/sendmail.php";
@@ -152,6 +175,7 @@ switch ($url) {
 
             $ds_email = all_email_tai_khoan();
             $is_email = '/^\\S+@\\S+\\.\\S+$/';
+            $is_password = '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/';
             $errors = [];
 
             if (empty(trim($email))) {
@@ -170,11 +194,17 @@ switch ($url) {
 
             if (empty(trim($mat_khau))) {
                 $errors["mat_khau"] = "Chưa đặt mật khẩu !";
+            }else{
+                if(!preg_match($is_password, $mat_khau)){
+                    $errors["mat_khau"] = "Mật khẩu quá yếu, cần có ít nhất 8 ký tự, 1 chữ hoa và 1 chữ thường và 1 ký tự đặc biệt!";
+                }
             }
 
+            $hashed_password = password_hash($mat_khau, PASSWORD_DEFAULT);
+
             if (empty($errors)) {
-                add_tai_khoan($email, $mat_khau);
-                $success = "Đăng ký thành công <33";
+                add_tai_khoan($email, $hashed_password);
+                $success = "Đăng ký thành công !";
             }
         }
         $VIEW = "client/tai_khoan/tai_khoan.php";
@@ -187,7 +217,7 @@ switch ($url) {
             $email = $_POST['email'];
             $mat_khau = $_POST['mat_khau'];
 
-            $tai_khoan = all_tai_khoan($email, $mat_khau);
+            $tai_khoan = all_tai_khoan($email, password_verify($mat_khau, $tai_khoan['mat_khau']));
 
             $is_email = '/^\\S+@\\S+\\.\\S+$/';
             $errors = [];
@@ -205,7 +235,7 @@ switch ($url) {
             }
 
             if (empty($errors)) {
-                if (is_array($tai_khoan)) {
+                if ($tai_khoan) {
                     $_SESSION["tai_khoan"] = $tai_khoan;
                     if ($tai_khoan["role"] == 1) {
                         header("location: index.php?url=admin");
