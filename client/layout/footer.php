@@ -77,6 +77,8 @@
 <a href="#" class="backtotop active">
     <i class="fa fa-angle-up"></i>
 </a>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/lelinh014756/fui-toast-js@master/assets/js/toast@1.0.1/fuiToast.min.js"></script>
 <script src="client/layout/assets/js/jquery-1.12.4.min.js?ver=<?= rand() ?>"></script>
 <script src="client/layout/assets/js/bootstrap.min.js?ver=<?= rand() ?>"></script>
 <script src="client/layout/assets/js/chosen.min.js?ver=<?= rand() ?>"></script>

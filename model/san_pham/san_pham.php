@@ -198,3 +198,24 @@ function san_pham_ban_them_gio_hang()
     $sp_bc = pdo_query($sql);
     return $sp_bc;
 }
+
+function binh_luan($id_kh, $id_sp_kc, $noi_dung)
+{
+    $sql = "insert into binh_luan (id_kh, id_sp_kc, noi_dung) values (?, ?, ?)";
+    pdo_execute($sql, $id_kh, $id_sp_kc, $noi_dung);
+}
+
+function so_luong_binh_luan($id_sp_kc)
+{
+    $sql = "select count(id) as sl_bl from binh_luan where id_sp_kc = ?";
+    $so_luong = pdo_query_one($sql, $id_sp_kc);
+    return $so_luong;
+}
+
+
+function danh_sach_binh_luan($id_sp_kc)
+{
+    $sql = "select * from binh_luan where id_sp_kc = ?";
+    $ds_bl = pdo_query($sql, $id_sp_kc);
+    return $ds_bl;
+}

@@ -21,10 +21,13 @@
     <link rel="stylesheet" type="text/css" href="client/layout/assets/css/dreaming-attribute.css?ver=<?= rand() ?>" />
     <link rel="stylesheet" type="text/css" href="client/layout/assets/css/style.css?ver=<?= rand() ?>" />
     <link rel="stylesheet" type="text/css" href="client/layout/assets/css/main.css?ver=<?= rand() ?>" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/lelinh014756/fui-toast-js@master/assets/css/toast@1.0.1/fuiToast.min.css">
+
     <title> <?= $title ?? "" ?> </title>
 </head>
 
 <body class="single single-product">
+<div id="fui-toast"></div>
     <header id="header" class="header style-02 header-dark header-transparent header-sticky">
         <div class="header-wrap-stick">
             <div class="header-position">

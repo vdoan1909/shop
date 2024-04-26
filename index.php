@@ -50,8 +50,22 @@ switch ($url) {
             $kich_co_san_pham = kich_co_san_pham($_GET["id_sp"]);
             $san_pham_cung_loai = san_pham_cung_loai($id_tl, $id_sp);
             $san_pham_ban_them = san_pham_ban_them($id_th);
+            $binh_luann = so_luong_binh_luan($_GET["id_sp_kc"]);
+            $ds_bl = danh_sach_binh_luan($_GET["id_sp_kc"]);
         }
+
         $VIEW = "client/product/chi_tiet_san_pham.php";
+        break;
+
+    case "binh_luan":
+        if (isset($_POST["cmt"]) && $_POST["cmt"] != "") {
+            if (isset($_SESSION["tai_khoan"])) {
+                binh_luan($_SESSION["tai_khoan"]["id"], $_POST["id_sp_kc"], $_POST["cmt"]);
+            }
+        }
+        $redirect_url = "index.php?url=ct_san_pham&id_sp=" . $_POST['id_sp'] . "&id_tl=" . $_POST['id_tl'] . "&id_th=" . $_POST['id_th'] . "&id_sp_kc=" . $_POST['id_sp_kc'];
+        header("Location: $redirect_url");
+        exit;
         break;
 
         // Giỏ hàng
@@ -150,14 +164,19 @@ switch ($url) {
                 $id_don_hang = add_don_hang($id_kh, $ten_nguoi_nhan, $email_nguoi_nhan, $sdt_nguoi_nhan, $dc_nguoi_nhan, $ghi_chu, $pttt, $amount, 0);
                 add_don_hang_chi_tiet($id_don_hang, $id_sp_kc_string, $so_luong_san_pham, $amount);
                 xoa_gio_hang_kh($_SESSION["tai_khoan"]["id"]);
+                require_once "assets/PHPMailer/sendmail.php";
+                $_SESSION["successPay"] = $id_don_hang;
+                header("location: index.php?url=trang_chu");
+                exit();
             } else {
                 $id_don_hang = add_don_hang($id_kh, $ten_nguoi_nhan, $email_nguoi_nhan, $sdt_nguoi_nhan, $dc_nguoi_nhan, $ghi_chu, $pttt, $amount, $amount);
                 add_don_hang_chi_tiet($id_don_hang, $id_sp_kc_string, $so_luong_san_pham, $amount);
                 xoa_gio_hang_kh($_SESSION["tai_khoan"]["id"]);
+                require_once "assets/PHPMailer/sendmail.php";
+                $_SESSION["successPay"] = $id_don_hang;
+                $VIEW = "assets/vnpay_php/vnpay_create_payment.php";
             }
         }
-        require_once "assets/PHPMailer/sendmail.php";
-        $VIEW = "assets/vnpay_php/vnpay_create_payment.php";
         break;
         // ========== THANH TOÁN ========== //
 
@@ -194,8 +213,8 @@ switch ($url) {
 
             if (empty(trim($mat_khau))) {
                 $errors["mat_khau"] = "Chưa đặt mật khẩu !";
-            }else{
-                if(!preg_match($is_password, $mat_khau)){
+            } else {
+                if (!preg_match($is_password, $mat_khau)) {
                     $errors["mat_khau"] = "Mật khẩu quá yếu, cần có ít nhất 8 ký tự, 1 chữ hoa và 1 chữ thường và 1 ký tự đặc biệt!";
                 }
             }

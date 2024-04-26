@@ -120,7 +120,7 @@ require_once("config.php");
                         value="<?= $_SESSION['tai_khoan']['email'] ?>" />
                 </div>
                 <button type="submit" name="redirect" id="redirect" class="btn btn-primary">Thanh
-                    toán trực tuyến</button>
+                    toán</button>
             </form>
         </div>
     </div>
